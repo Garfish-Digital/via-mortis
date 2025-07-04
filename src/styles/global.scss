@@ -1,0 +1,253 @@
+@import 'variables';
+@import 'glitch-effects';
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap');
+
+// Global Reset and Base Styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: $font-body;
+  background-color: $pure-black;
+  color: $ghost-white;
+  overflow-x: hidden;
+}
+
+body {
+  background: linear-gradient(
+    135deg,
+    $pure-black 0%,
+    $shadow-gray 50%,
+    $fog-gray 100%
+  );
+  min-height: 100vh;
+  line-height: 1.6;
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 20% 80%, rgba($primary-blood, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba($secondary-scream, 0.03) 0%, transparent 50%);
+    z-index: -1;
+    pointer-events: none;
+  }
+}
+
+// Typography
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-scary;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  color: $primary-blood;
+  text-shadow: 
+    0 0 10px $primary-blood,
+    0 0 20px $primary-blood,
+    0 0 30px $primary-blood;
+}
+
+h2 {
+  font-size: clamp(2rem, 6vw, 4rem);
+  color: $secondary-scream;
+  text-shadow: 
+    0 0 8px $secondary-scream,
+    0 0 16px $secondary-scream;
+}
+
+h3 {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  color: $accent-brass;
+  text-shadow: 
+    0 0 5px $accent-brass,
+    0 0 10px $accent-brass;
+}
+
+p {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  margin-bottom: 1rem;
+  color: $ghost-white;
+}
+
+// Layout Utilities
+.container {
+  max-width: $wide;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  
+  @media (max-width: $tablet) {
+    padding: 0 1rem;
+  }
+}
+
+.section {
+  padding: 4rem 0;
+  position: relative;
+  
+  @media (max-width: $tablet) {
+    padding: 2rem 0;
+  }
+}
+
+// Interactive Elements
+button {
+  background: linear-gradient(135deg, $primary-dark 0%, $primary-blood 100%);
+  color: $ghost-white;
+  border: 2px solid $primary-blood;
+  padding: 0.75rem 1.5rem;
+  font-family: $font-body;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all $transition-normal ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  
+  &:hover {
+    background: linear-gradient(135deg, $primary-blood 0%, $secondary-scream 100%);
+    color: $pure-black;
+    border-color: $secondary-scream;
+    transform: translateY(-2px);
+    box-shadow: 
+      0 4px 15px rgba($primary-blood, 0.4),
+      0 0 30px rgba($secondary-scream, 0.2);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+a {
+  color: $secondary-scream;
+  text-decoration: none;
+  transition: all $transition-fast ease;
+  
+  &:hover {
+    color: $primary-blood;
+    text-shadow: 0 0 10px $primary-blood;
+  }
+}
+
+// Fullscreen Sections
+.fullscreen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+// Card Styles
+.card {
+  background: rgba($shadow-gray, 0.8);
+  border: 1px solid rgba($primary-blood, 0.3);
+  border-radius: 8px;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba($primary-blood, 0.1) 0%,
+      transparent 50%,
+      rgba($secondary-scream, 0.05) 100%
+    );
+    border-radius: inherit;
+    z-index: -1;
+  }
+}
+
+// Scrollbar Styling
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $shadow-gray;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, $primary-blood, $primary-dark);
+  border-radius: 4px;
+  
+  &:hover {
+    background: linear-gradient(to bottom, $secondary-scream, $accent-brass);
+  }
+}
+
+// Loading States
+.loading {
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    margin: -20px 0 0 -20px;
+    border: 2px solid rgba($primary-blood, 0.3);
+    border-top: 2px solid $primary-blood;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// Responsive Utilities
+@media (max-width: $tablet) {
+  .hide-mobile {
+    display: none;
+  }
+}
+
+@media (min-width: $tablet) {
+  .hide-desktop {
+    display: none;
+  }
+}
+
+// Accessibility
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+// Focus styles
+*:focus {
+  outline: 2px solid $secondary-scream;
+  outline-offset: 2px;
+}

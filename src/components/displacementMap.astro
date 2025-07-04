@@ -1,0 +1,227 @@
+---
+export interface Props {
+  intensity?: number;
+  frequency?: number;
+  className?: string;
+}
+
+const { 
+  intensity = 15, 
+  frequency = 0.02,
+  className = '' 
+} = Astro.props;
+---
+
+<div class={`displacement-wrapper ${className}`}>
+  <slot />
+  
+  <!-- SVG Filter for Displacement -->
+  <svg class="displacement-filter" width="0" height="0">
+    <defs>
+      <filter id="displace" x="-50%" y="-50%" width="200%" height="200%">
+        <feTurbulence 
+          baseFrequency={frequency} 
+          numOctaves="3" 
+          result="turbulence" 
+          type="fractalNoise"
+        />
+        <feDisplacementMap 
+          in="SourceGraphic" 
+          in2="turbulence" 
+          scale={intensity}
+        />
+      </filter>
+      
+      <filter id="displace-hover" x="-50%" y="-50%" width="200%" height="200%">
+        <feTurbulence 
+          baseFrequency={frequency * 2} 
+          numOctaves="4" 
+          result="turbulence" 
+          type="turbulence"
+        />
+        <feDisplacementMap 
+          in="SourceGraphic" 
+          in2="turbulence" 
+          scale={intensity * 2}
+        />
+        <feColorMatrix 
+          type="hueRotate" 
+          values="180"
+        />
+      </filter>
+      
+      <filter id="displace-extreme" x="-50%" y="-50%" width="200%" height="200%">
+        <feTurbulence 
+          baseFrequency={frequency * 3} 
+          numOctaves="5" 
+          result="turbulence" 
+          type="fractalNoise"
+        />
+        <feDisplacementMap 
+          in="SourceGraphic" 
+          in2="turbulence" 
+          scale={intensity * 3}
+        />
+        <feColorMatrix 
+          type="saturate" 
+          values="1.5"
+        />
+        <feGaussianBlur 
+          stdDeviation="1"
+        />
+      </filter>
+    </defs>
+  </svg>
+</div>
+
+<style define:vars={{ intensity: `${intensity}px`, frequency }}>
+  .displacement-wrapper {
+    position: relative;
+    display: inline-block;
+    transition: filter 0.3s ease;
+  }
+
+  .displacement-wrapper:hover {
+    filter: url(#displace-hover);
+  }
+
+  .displacement-wrapper.active {
+    filter: url(#displace);
+  }
+
+  .displacement-wrapper.extreme {
+    filter: url(#displace-extreme);
+  }
+
+  .displacement-filter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+  }
+
+  /* Animate the turbulence */
+  .displacement-wrapper.animated {
+    animation: displacement-shift 4s ease-in-out infinite;
+  }
+
+  @keyframes displacement-shift {
+    0% {
+      filter: url(#displace) hue-rotate(0deg);
+    }
+    25% {
+      filter: url(#displace-hover) hue-rotate(90deg);
+    }
+    50% {
+      filter: url(#displace-extreme) hue-rotate(180deg);
+    }
+    75% {
+      filter: url(#displace-hover) hue-rotate(270deg);
+    }
+    100% {
+      filter: url(#displace) hue-rotate(360deg);
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .displacement-wrapper {
+      filter: none;
+    }
+    
+    .displacement-wrapper:hover {
+      filter: blur(1px) hue-rotate(90deg);
+    }
+  }
+
+  /* Accessibility - reduce motion */
+  @media (prefers-reduced-motion: reduce) {
+    .displacement-wrapper {
+      animation: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  class DisplacementMap {
+    constructor(element: HTMLElement) {
+      this.element = element;
+      this.init();
+    }
+
+    private element: HTMLElement;
+    private animationId: number | null = null;
+
+    init() {
+      this.setupInteractions();
+      this.startRandomDisplacement();
+    }
+
+    private setupInteractions() {
+      this.element.addEventListener('mouseenter', () => {
+        this.element.classList.add('active');
+      });
+
+      this.element.addEventListener('mouseleave', () => {
+        this.element.classList.remove('active');
+      });
+
+      // Add click for extreme effect
+      this.element.addEventListener('click', () => {
+        this.element.classList.add('extreme');
+        setTimeout(() => {
+          this.element.classList.remove('extreme');
+        }, 1000);
+      });
+    }
+
+    private startRandomDisplacement() {
+      const randomDisplace = () => {
+        if (Math.random() > 0.85) {
+          this.element.classList.add('animated');
+          setTimeout(() => {
+            this.element.classList.remove('animated');
+          }, 4000);
+        }
+        
+        const nextInterval = Math.random() * 10000 + 5000;
+        setTimeout(randomDisplace, nextInterval);
+      };
+
+      randomDisplace();
+    }
+
+    private updateTurbulence() {
+      const turbulence = this.element.querySelector('feTurbulence');
+      if (turbulence) {
+        const time = Date.now() * 0.001;
+        const baseFreq = parseFloat(turbulence.getAttribute('baseFrequency') || '0.02');
+        const newFreq = baseFreq + Math.sin(time) * 0.01;
+        turbulence.setAttribute('baseFrequency', newFreq.toString());
+      }
+    }
+
+    destroy() {
+      if (this.animationId) {
+        cancelAnimationFrame(this.animationId);
+      }
+    }
+  }
+
+  // Initialize displacement maps
+  document.addEventListener('DOMContentLoaded', () => {
+    const displacementWrappers = document.querySelectorAll<HTMLElement>('.displacement-wrapper');
+    displacementWrappers.forEach(wrapper => {
+      new DisplacementMap(wrapper);
+    });
+  });
+
+  // Re-initialize on page transitions
+  document.addEventListener('astro:page-load', () => {
+    const displacementWrappers = document.querySelectorAll<HTMLElement>('.displacement-wrapper');
+    displacementWrappers.forEach(wrapper => {
+      new DisplacementMap(wrapper);
+    });
+  });
+</script>

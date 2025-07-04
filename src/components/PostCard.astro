@@ -1,0 +1,341 @@
+---
+import GlitchTransition from './GlitchTransition.astro';
+import DisplacementMap from './displacementMap.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  date?: string;
+  category?: string;
+  href?: string;
+  className?: string;
+}
+
+const { 
+  title, 
+  description, 
+  image, 
+  date, 
+  category = 'Attraction',
+  href = '#',
+  className = ''
+} = Astro.props;
+---
+
+<article class={`post-card ${className}`}>
+  <DisplacementMap intensity={10} frequency={0.015} className="card-wrapper">
+    <div class="card-inner">
+      {image && (
+        <div class="card-image">
+          <img src={image} alt={title} loading="lazy" />
+          <div class="image-overlay"></div>
+        </div>
+      )}
+      
+      <div class="card-content">
+        <div class="card-meta">
+          <span class="category">{category}</span>
+          {date && <span class="date">{date}</span>}
+        </div>
+        
+        <GlitchTransition trigger="hover" intensity="medium" className="title-wrapper">
+          <h3 class="card-title">
+            <a href={href}>{title}</a>
+          </h3>
+        </GlitchTransition>
+        
+        <p class="card-description">{description}</p>
+        
+        <div class="card-footer">
+          <a href={href} class="read-more">
+            Enter If You Dare
+            <span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Liquid fill effect -->
+      <div class="liquid-fill"></div>
+    </div>
+  </DisplacementMap>
+</article>
+
+<style>
+  .post-card {
+    position: relative;
+    height: 100%;
+    transition: transform 0.3s ease;
+  }
+
+  .card-wrapper {
+    height: 100%;
+    display: block;
+  }
+
+  .card-inner {
+    position: relative;
+    height: 100%;
+    background: linear-gradient(
+      135deg,
+      rgba(26, 26, 26, 0.9) 0%,
+      rgba(42, 42, 42, 0.8) 50%,
+      rgba(26, 26, 26, 0.9) 100%
+    );
+    border: 1px solid rgba(73, 0, 0, 0.3);
+    border-radius: 12px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+  }
+
+  .card-inner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(233, 0, 0, 0.1) 0%,
+      transparent 50%,
+      rgba(187, 255, 0, 0.05) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+  }
+
+  .card-inner:hover::before {
+    opacity: 1;
+  }
+
+  .card-image {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    filter: grayscale(20%) contrast(1.1);
+  }
+
+  .image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(73, 0, 0, 0.4) 100%
+    );
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+  }
+
+  .card-inner:hover .image-overlay {
+    opacity: 0.9;
+  }
+
+  .card-inner:hover .card-image img {
+    transform: scale(1.05);
+    filter: grayscale(0%) contrast(1.3) hue-rotate(15deg);
+  }
+
+  .card-content {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+  }
+
+  .card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    opacity: 0.8;
+  }
+
+  .category {
+    color: #bbff00;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.75rem;
+  }
+
+  .date {
+    color: #4b4b01;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+  }
+
+  .title-wrapper {
+    margin-bottom: 1rem;
+  }
+
+  .card-title {
+    margin: 0;
+    font-size: 1.5rem;
+    font-family: 'Creepster', cursive;
+    line-height: 1.3;
+  }
+
+  .card-title a {
+    color: #f8f8f8;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: block;
+  }
+
+  .card-title a:hover {
+    color: #e90000;
+    text-shadow: 
+      0 0 10px #e90000,
+      0 0 20px #e90000;
+  }
+
+  .card-description {
+    color: #f8f8f8;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+    flex: 1;
+  }
+
+  .card-footer {
+    margin-top: auto;
+  }
+
+  .read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #bbff00;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid transparent;
+  }
+
+  .read-more:hover {
+    color: #e90000;
+    border-bottom-color: #e90000;
+    text-shadow: 0 0 10px #e90000;
+  }
+
+  .arrow {
+    transition: transform 0.3s ease;
+    font-size: 1rem;
+  }
+
+  .read-more:hover .arrow {
+    transform: translateX(5px);
+  }
+
+  /* Liquid fill effect */
+  .liquid-fill {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    background: linear-gradient(
+      to top,
+      rgba(233, 0, 0, 0.3) 0%,
+      rgba(73, 0, 0, 0.2) 50%,
+      rgba(233, 0, 0, 0.1) 100%
+    );
+    transition: height 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .card-inner:hover .liquid-fill {
+    height: 30%;
+  }
+
+  /* Scanline effect */
+  .card-inner::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(187, 255, 0, 0.03) 2px,
+      rgba(187, 255, 0, 0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .card-inner:hover::after {
+    opacity: 1;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .card-image {
+      height: 150px;
+    }
+    
+    .card-content {
+      padding: 1rem;
+    }
+    
+    .card-title {
+      font-size: 1.25rem;
+    }
+    
+    .card-description {
+      font-size: 0.9rem;
+    }
+  }
+
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .card-inner,
+    .card-image img,
+    .liquid-fill,
+    .arrow {
+      transition: none;
+    }
+    
+    .card-inner:hover .card-image img {
+      transform: none;
+    }
+  }
+
+  /* Focus styles */
+  .card-title a:focus,
+  .read-more:focus {
+    outline: 2px solid #bbff00;
+    outline-offset: 2px;
+  }
+</style>

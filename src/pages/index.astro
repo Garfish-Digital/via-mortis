@@ -1,0 +1,571 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GlitchTransition from '../components/GlitchTransition.astro';
+import DisplacementMap from '../components/displacementMap.astro';
+import PourAnimation from '../components/PourAnimation.astro';
+import PostCard from '../components/PostCard.astro';
+---
+
+<BaseLayout title="Morbid Curios - Macabre Tourism & Haunted Attractions">
+  <!-- Hero Section -->
+  <section class="hero fullscreen">
+    <div class="hero-content">
+      <DisplacementMap intensity={20} frequency={0.025} className="hero-title-wrapper">
+        <GlitchTransition trigger="auto" intensity="high" className="hero-title">
+          <h1>Morbid Curios</h1>
+        </GlitchTransition>
+      </DisplacementMap>
+      
+      <div class="hero-subtitle">
+        <p>Where the curious come to die</p>
+      </div>
+      
+      <PourAnimation trigger="scroll" className="hero-animation" />
+      
+      <div class="hero-cta">
+        <button class="cta-button">Enter the Darkness</button>
+      </div>
+    </div>
+    
+    <div class="hero-fog"></div>
+  </section>
+
+  <!-- Tap List Section -->
+  <section class="section tap-list ct-scanlines">
+    <div class="container">
+      <GlitchTransition trigger="scroll" intensity="medium">
+        <h2>Haunted Attractions</h2>
+      </GlitchTransition>
+      
+      <div class="attractions-grid">
+        <PostCard
+          title="The Screaming Cellar"
+          description="Descend into madness where the walls themselves cry out in agony. Experience the terror of being trapped beneath the earth with only your fears for company."
+          image="https://images.unsplash.com/photo-1520637836862-4d197d17c962?w=400&h=300&fit=crop"
+          date="Est. 1887"
+          category="Haunted Tour"
+          href="/attractions/screaming-cellar"
+        />
+        
+        <PostCard
+          title="Mirror Maze of Souls"
+          description="Navigate through an endless labyrinth of distorted reflections. Each mirror shows not what you are, but what you could become."
+          image="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&h=300&fit=crop"
+          date="Est. 1923"
+          category="Interactive Horror"
+          href="/attractions/mirror-maze"
+        />
+        
+        <PostCard
+          title="The Midnight Seance"
+          description="Commune with the restless spirits that refuse to cross over. Some conversations are meant to be one-sided."
+          image="https://images.unsplash.com/photo-1532021653851-615e3c3c4374?w=400&h=300&fit=crop"
+          date="Nightly"
+          category="Paranormal Experience"
+          href="/attractions/midnight-seance"
+        />
+        
+        <PostCard
+          title="Surgeon's Theatre"
+          description="Step into the operating room where the boundary between healing and harm was forever blurred. The doctor will see you now."
+          image="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop"
+          date="Est. 1902"
+          category="Medical Horror"
+          href="/attractions/surgeons-theatre"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Story Section -->
+  <section class="section our-story mist-effect">
+    <div class="container">
+      <div class="story-content">
+        <DisplacementMap intensity={12} frequency={0.02} className="story-text">
+          <GlitchTransition trigger="scroll" intensity="low">
+            <h2>Our Cursed History</h2>
+          </GlitchTransition>
+          
+          <div class="story-paragraphs">
+            <p>
+              In the shadow of forgotten streets, where the veil between worlds grows thin, 
+              stands our collection of cursed curiosities. Each attraction tells a tale of 
+              those who dared to venture where mortal souls were never meant to tread.
+            </p>
+            
+            <p>
+              Since 1887, we have been the custodians of the macabre, the guardians of 
+              experiences that chill the blood and quicken the pulse. Our visitors leave 
+              forever changed, carrying with them memories that blur the line between 
+              nightmare and reality.
+            </p>
+            
+            <p>
+              The building itself seems to hunger for new souls, its walls absorbing the 
+              screams and laughter of countless guests. Some say the attraction chooses 
+              its visitors, drawing them from miles around with an inexplicable pull.
+            </p>
+          </div>
+        </DisplacementMap>
+        
+        <div class="story-image">
+          <img src="https://images.unsplash.com/photo-1500048993953-d23a436266cf?w=600&h=400&fit=crop" alt="Our haunted history" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Taproom/Events Section -->
+  <section class="section events-section">
+    <div class="container">
+      <GlitchTransition trigger="scroll" intensity="medium">
+        <h2>Upcoming Horrors</h2>
+      </GlitchTransition>
+      
+      <div class="events-calendar">
+        <div class="event-card">
+          <div class="event-date">
+            <span class="day">13</span>
+            <span class="month">Oct</span>
+          </div>
+          <div class="event-details">
+            <h3>Midnight Massacre Tour</h3>
+            <p>Experience our most terrifying attraction after hours. Limited to 13 brave souls.</p>
+            <span class="event-time">11:30 PM - 2:00 AM</span>
+          </div>
+          <div class="event-cta">
+            <button class="event-button">Book Now</button>
+          </div>
+        </div>
+        
+        <div class="event-card">
+          <div class="event-date">
+            <span class="day">31</span>
+            <span class="month">Oct</span>
+          </div>
+          <div class="event-details">
+            <h3>Halloween Hysteria</h3>
+            <p>Our annual celebration of all things macabre. Costumes encouraged, sanity optional.</p>
+            <span class="event-time">6:00 PM - 3:00 AM</span>
+          </div>
+          <div class="event-cta">
+            <button class="event-button">Reserve</button>
+          </div>
+        </div>
+        
+        <div class="event-card">
+          <div class="event-date">
+            <span class="day">02</span>
+            <span class="month">Nov</span>
+          </div>
+          <div class="event-details">
+            <h3>Séance with the Departed</h3>
+            <p>Join our medium as she attempts to contact the spirits that still roam our halls.</p>
+            <span class="event-time">9:00 PM - 11:00 PM</span>
+          </div>
+          <div class="event-cta">
+            <button class="event-button">Join</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact/Footer Section -->
+  <section class="section contact-section">
+    <div class="container">
+      <div class="contact-content">
+        <div class="contact-info">
+          <GlitchTransition trigger="hover" intensity="low">
+            <h3>Find Your Way to Damnation</h3>
+          </GlitchTransition>
+          
+          <div class="contact-details">
+            <div class="detail-item">
+              <span class="detail-label">Address:</span>
+              <span class="detail-value">666 Nightmare Lane, Shadow Valley</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Phone:</span>
+              <span class="detail-value">(555) HAUNT-ME</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Hours:</span>
+              <span class="detail-value">Dusk till Dawn, Every Night</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="warning-notice">
+          <h4>⚠️ Warning</h4>
+          <p>
+            Morbid Curios is not responsible for psychological trauma, existential dread, 
+            or permanent changes to your perception of reality. Enter at your own risk.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Hero Section */
+  .hero {
+    position: relative;
+    background: linear-gradient(
+      135deg,
+      #000 0%,
+      #490000 30%,
+      #000 70%,
+      #2a2a2a 100%
+    );
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23490000" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .hero-title-wrapper {
+    margin-bottom: 2rem;
+  }
+
+  .hero-title h1 {
+    font-size: clamp(3rem, 10vw, 8rem);
+    margin-bottom: 1rem;
+    text-shadow: 
+      0 0 20px #e90000,
+      0 0 40px #e90000,
+      0 0 60px #e90000,
+      0 0 80px #e90000;
+  }
+
+  .hero-subtitle {
+    margin-bottom: 3rem;
+  }
+
+  .hero-subtitle p {
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    color: #bbff00;
+    font-style: italic;
+    text-shadow: 0 0 20px #bbff00;
+  }
+
+  .hero-animation {
+    margin: 3rem 0;
+  }
+
+  .hero-cta {
+    margin-top: 3rem;
+  }
+
+  .cta-button {
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #490000 0%, #e90000 100%);
+    border: 2px solid #e90000;
+    color: #f8f8f8;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    border-radius: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .cta-button:hover::before {
+    left: 100%;
+  }
+
+  .cta-button:hover {
+    background: linear-gradient(135deg, #e90000 0%, #bbff00 100%);
+    color: #000;
+    border-color: #bbff00;
+    transform: translateY(-3px);
+    box-shadow: 
+      0 6px 20px rgba(233, 0, 0, 0.4),
+      0 0 40px rgba(187, 255, 0, 0.3);
+  }
+
+  .hero-fog {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(
+      to top,
+      rgba(42, 42, 42, 0.8) 0%,
+      rgba(42, 42, 42, 0.4) 50%,
+      transparent 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Attractions Grid */
+  .attractions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  /* Our Story Section */
+  .our-story {
+    background: linear-gradient(
+      135deg,
+      #1a1a1a 0%,
+      #2a2a2a 50%,
+      #1a1a1a 100%
+    );
+    padding: 6rem 0;
+  }
+
+  .story-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .story-text h2 {
+    margin-bottom: 2rem;
+  }
+
+  .story-paragraphs p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #f8f8f8;
+  }
+
+  .story-image {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .story-image img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    filter: grayscale(30%) contrast(1.2);
+    transition: transform 0.5s ease;
+  }
+
+  .story-image:hover img {
+    transform: scale(1.05);
+    filter: grayscale(0%) contrast(1.4) hue-rotate(15deg);
+  }
+
+  /* Events Section */
+  .events-section {
+    padding: 6rem 0;
+  }
+
+  .events-calendar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .event-card {
+    background: rgba(26, 26, 26, 0.9);
+    border: 1px solid rgba(233, 0, 0, 0.3);
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+  }
+
+  .event-card:hover {
+    border-color: #bbff00;
+    transform: translateY(-5px);
+    box-shadow: 
+      0 10px 30px rgba(233, 0, 0, 0.2),
+      0 0 50px rgba(187, 255, 0, 0.1);
+  }
+
+  .event-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(135deg, #490000, #e90000);
+    border-radius: 8px;
+    padding: 1rem;
+    min-width: 60px;
+  }
+
+  .event-date .day {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #f8f8f8;
+    font-family: 'Fira Code', monospace;
+  }
+
+  .event-date .month {
+    font-size: 0.875rem;
+    color: #f8f8f8;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .event-details {
+    flex: 1;
+  }
+
+  .event-details h3 {
+    color: #bbff00;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+  }
+
+  .event-details p {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    opacity: 0.9;
+  }
+
+  .event-time {
+    font-size: 0.8rem;
+    color: #4b4b01;
+    font-family: 'Fira Code', monospace;
+  }
+
+  .event-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+
+  /* Contact Section */
+  .contact-section {
+    background: linear-gradient(
+      135deg,
+      #1a1a1a 0%,
+      #000 50%,
+      #1a1a1a 100%
+    );
+    padding: 6rem 0;
+  }
+
+  .contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .contact-info h3 {
+    margin-bottom: 2rem;
+    color: #e90000;
+  }
+
+  .contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .detail-label {
+    font-size: 0.9rem;
+    color: #bbff00;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .detail-value {
+    font-size: 1.1rem;
+    color: #f8f8f8;
+    font-family: 'Fira Code', monospace;
+  }
+
+  .warning-notice {
+    background: rgba(233, 0, 0, 0.1);
+    border: 1px solid rgba(233, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 2rem;
+  }
+
+  .warning-notice h4 {
+    color: #e90000;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+
+  .warning-notice p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #f8f8f8;
+    opacity: 0.9;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .hero-content {
+      padding: 1rem;
+    }
+    
+    .attractions-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    
+    .story-content,
+    .contact-content {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    
+    .events-calendar {
+      grid-template-columns: 1fr;
+    }
+    
+    .event-card {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>

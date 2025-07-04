@@ -1,0 +1,38 @@
+// Morbid Curios - Color Palette
+$primary-dark: #490000;
+$primary-blood: #e90000;
+$secondary-scream: #bbff00;
+$accent-brass: #4b4b01;
+$pure-black: #000000;
+$ghost-white: #f8f8f8;
+$fog-gray: #2a2a2a;
+$shadow-gray: #1a1a1a;
+
+// Typography
+$font-scary: 'Creepster', cursive;
+$font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+$font-mono: 'Fira Code', monospace;
+
+// Glitch Animation Values
+$glitch-duration: 0.3s;
+$glitch-intensity: 8px;
+$scanline-speed: 2s;
+$distortion-strength: 15px;
+
+// Breakpoints
+$mobile: 480px;
+$tablet: 768px;
+$desktop: 1024px;
+$wide: 1200px;
+
+// Z-index layers
+$z-glitch: 999;
+$z-scanlines: 998;
+$z-overlay: 997;
+$z-content: 1;
+
+// Transition timings
+$transition-fast: 0.15s;
+$transition-normal: 0.3s;
+$transition-slow: 0.6s;
+$transition-crawl: 1.2s;
