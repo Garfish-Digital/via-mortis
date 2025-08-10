@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**Morbid Curios** is a sophisticated Astro demo site for a macabre tourism & haunted attraction business. This is the fifth demo in a portfolio showcase series, focusing on advanced glitch effects and unsettling user experiences.
+**Via Mortis** is a sophisticated Astro demo site for a macabre tourism & haunted attraction business. This is the fifth demo in a portfolio showcase series, focusing on advanced glitch effects and unsettling user experiences.
 
 ## Technology Stack
 
