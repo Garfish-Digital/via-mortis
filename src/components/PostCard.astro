@@ -116,7 +116,7 @@ const {
   .card-image {
     position: relative;
     width: 100%;
-    height: 200px;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
     flex-shrink: 0;
   }
@@ -135,11 +135,70 @@ const {
     left: 0;
     right: 0;
     bottom: 0;
+
+    /* OVERLAY OPTIONS - Uncomment to try different effects */
+
+    /* Option 1: Sickly Green Vignette - Radioactive edge glow
+    background: radial-gradient(
+      ellipse at center,
+      transparent 0%,
+      rgba(75, 75, 1, 0.3) 40%,
+      rgba(187, 255, 0, 0.4) 100%
+    );
+    */
+
+    /* Option 2: Blood Vignette - Red bleeds from edges
+    background: radial-gradient(
+      ellipse at center,
+      rgba(0, 0, 0, 0.1) 0%,
+      rgba(73, 0, 0, 0.5) 60%,
+      rgba(233, 0, 0, 0.7) 100%
+    );
+    */
+
+    /* Option 3: Corrupted Film - Diagonal streaks like damaged VHS
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(233, 0, 0, 0.2) 25%,
+      rgba(187, 255, 0, 0.1) 50%,
+      rgba(0, 0, 0, 0.4) 100%
+    );
+    */
+
+    /* Option 4: Heavy Morgue Shadow - Strong black gradient
     background: linear-gradient(
       to bottom,
-      rgba(0, 0, 0, 0.2) 0%,
-      rgba(73, 0, 0, 0.4) 100%
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(0, 0, 0, 0.3) 50%,
+      rgba(0, 0, 0, 0.8) 100%
     );
+    */
+
+    /* Option 5: Dual-Tone Split (ACTIVE) - Disorienting chromatic aberration */
+    background:
+      /* Subtle black gradient from bottom to top */
+      linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.7) 0%,
+        transparent 60%
+      ),
+      /* Dual-tone chromatic split underneath */
+      linear-gradient(
+        to bottom right,
+        rgba(233, 0, 0, 0.4) 0%,
+        rgba(0, 0, 0, 0.2) 50%,
+        rgba(187, 255, 0, 0.3) 100%
+      );
+
+    /* Option 6: Subtle Desaturation - Muted gray-to-crimson deadening
+    background: linear-gradient(
+      to bottom,
+      rgba(42, 42, 42, 0.3) 0%,
+      rgba(73, 0, 0, 0.5) 100%
+    );
+    */
+
     opacity: 0.8;
     transition: opacity 0.3s ease;
   }
@@ -301,18 +360,14 @@ const {
 
   /* Responsive */
   @media (max-width: 768px) {
-    .card-image {
-      height: 150px;
-    }
-    
     .card-content {
       padding: 1rem;
     }
-    
+
     .card-title {
       font-size: 1.25rem;
     }
-    
+
     .card-description {
       font-size: 0.9rem;
     }

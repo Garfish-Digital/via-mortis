@@ -64,7 +64,7 @@ import PostCard from "../components/PostCard.astro";
         <PostCard
           title="The Screaming Cellar"
           description="Descend into madness where the walls themselves cry out in agony. Experience the terror of being trapped beneath the earth with only your fears for company."
-          image="/cellar/istockphoto-2055189037-1024x1024.jpg"
+          image="/dungeon-stairwell-2.jpg"
           date="Est. 1887"
           category="Haunted Tour"
           href="/attractions/screaming-cellar"
@@ -73,7 +73,7 @@ import PostCard from "../components/PostCard.astro";
         <PostCard
           title="Mirror Maze of Souls"
           description="Navigate through an endless labyrinth of distorted reflections. Each mirror shows not what you are, but what you could become."
-          image="/mirror/istockphoto-2163637655-1024x1024.jpg"
+          image="/mirror-1.jpg"
           date="Est. 1923"
           category="Interactive Horror"
           href="/attractions/mirror-maze"
@@ -82,7 +82,7 @@ import PostCard from "../components/PostCard.astro";
         <PostCard
           title="Extreme Hauntings"
           description="Step into the operating room where the boundary between healing and harm was forever blurred. The doctor will see you now."
-          image="/haunted/istockphoto-1440012150-1024x1024.jpg"
+          image="/stairwell-2.jpg"
           date="Est. 1902"
           category="Extreme Hauntings"
           href="/attractions/surgeons-theatre"
@@ -91,7 +91,7 @@ import PostCard from "../components/PostCard.astro";
         <PostCard
           title="Surgeon's Theatre"
           description="Step into the operating room where the boundary between healing and harm was forever blurred. The doctor will see you now."
-          image="/medical/istockphoto-1297752903-1024x1024.jpg"
+          image="/medical-1.webp"
           date="Est. 1902"
           category="Medical Horror"
           href="/attractions/surgeons-theatre"
@@ -100,7 +100,7 @@ import PostCard from "../components/PostCard.astro";
         <PostCard
           title="Famous Crimes"
           description="Step into the operating room where the boundary between healing and harm was forever blurred. The doctor will see you now."
-          image="/crime/istockphoto-1481901241-1024x1024.jpg"
+          image="/crime-scene-1.webp"
           date="Est. 1902"
           category="Famous Crimes"
           href="/attractions/surgeons-theatre"
@@ -109,7 +109,7 @@ import PostCard from "../components/PostCard.astro";
         <PostCard
           title="The Midnight Seance"
           description="Commune with the restless spirits that refuse to cross over. Some conversations are meant to be one-sided."
-          image="public/seance/istockphoto-1202005263-1024x1024.jpg"
+          image="/ouija.webp"
           date="Nightly"
           category="Paranormal Experience"
           href="/attractions/midnight-seance"
@@ -153,6 +153,7 @@ import PostCard from "../components/PostCard.astro";
 
         <div class="story-image">
           <img src="/public/images/building.jpg" alt="Our haunted history" />
+          <div class="story-image-overlay"></div>
         </div>
       </div>
     </div>
@@ -301,21 +302,20 @@ import PostCard from "../components/PostCard.astro";
   }
 
   .hero-title-wrapper {
-    /* margin-bottom: 2rem; */
     font-family: "Creepster", cursive;
     font-size: clamp(6rem, 8vw, 8rem) !important;
   }
 
   .hero-title-wrapper .hero-title h1 {
-    font-family: "Creepster", cursive !important;
+    /* font-family: "Creepster", cursive !important; */
     /* font-size: clamp(6rem, 20vw, 16rem) !important; */
     /* margin-bottom: 1rem; */
-    font-weight: 400 !important;
-    text-shadow:
+    /* font-weight: 400 !important; */
+    /* text-shadow:
       0 0 20px #e90000,
       0 0 40px #e90000,
       0 0 60px #e90000,
-      0 0 80px #e90000;
+      0 0 80px #e90000; */
   }
 
   .hero-subtitle {
@@ -438,6 +438,7 @@ import PostCard from "../components/PostCard.astro";
   }
 
   .story-image img {
+    display: block;
     width: 100%;
     height: 400px;
     object-fit: cover;
@@ -448,6 +449,28 @@ import PostCard from "../components/PostCard.astro";
   .story-image:hover img {
     transform: scale(1.05);
     filter: grayscale(0%) contrast(1.4) hue-rotate(15deg);
+  }
+
+  .story-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Blood Vignette - Red bleeds from edges */
+    background: radial-gradient(
+      ellipse at center,
+      rgba(0, 0, 0, 0.01) 0%,
+      rgba(50, 0, 0, 0.4) 40%,
+      rgba(25, 0, 0, 0.9) 100%
+    );
+    /* opacity: 0.8; */
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .story-image:hover .story-image-overlay {
+    opacity: 0.9;
   }
 
   /* Events Section */
@@ -603,6 +626,10 @@ import PostCard from "../components/PostCard.astro";
     .hero-content {
       padding: 1rem;
     }
+
+    .hero-title-wrapper {
+    font-size: clamp(3rem, 4vw, 4rem) !important;
+  }
 
     .attractions-grid {
       grid-template-columns: 1fr;
