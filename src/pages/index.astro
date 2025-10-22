@@ -25,21 +25,12 @@ import PostCard from "../components/PostCard.astro";
           trigger="auto"
           intensity="high"
           className="hero-title"
+          data-destructible
         >
           <p>Where the curious come to rest</p>
         </GlitchTransition>
       </DisplacementMap>
-      <!-- <DisplacementMap intensity={20} frequency={0.025} className="hero-title-wrapper">
-        <GlitchTransition trigger="auto" intensity="high" className="hero-title">
-          <h1>Via Mortis</h1>
-        </GlitchTransition>
-      </DisplacementMap>
-      
-      <div class="hero-subtitle">
-        <p>Where the curious come to die</p>
-      </div>
-       -->
-      <!-- <PourAnimation trigger="scroll" className="hero-animation" /> -->
+     
       <BloodDrip
         streamCount={2}
         intensity="medium"
@@ -159,7 +150,7 @@ import PostCard from "../components/PostCard.astro";
         </DisplacementMap>
 
         <div class="story-image" data-destructible>
-          <img src="/public/building.jpg" alt="Our haunted history" />
+          <img src="/building.jpg" alt="Our haunted history" />
           <div class="story-image-overlay"></div>
         </div>
       </div>
@@ -918,6 +909,20 @@ import PostCard from "../components/PostCard.astro";
   .fall-hinge-right-active {
     animation: fall-hinge-right 2s ease-in forwards;
   }
+  
+    .body-fading {
+      animation: body-fade-out 10000ms ease-in forwards;
+    }
+
+  /* Body fade out animation */
+  @keyframes body-fade-out {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
 
   /* Button charging effect */
   @keyframes button-charge {
@@ -1019,6 +1024,9 @@ import PostCard from "../components/PostCard.astro";
     }
 
     destroyElements() {
+      // Start body fade out animation
+      document.body.classList.add('body-fading');
+
       // Get all destructible elements
       const elements = document.querySelectorAll<HTMLElement>('[data-destructible]');
       const elementsArray = Array.from(elements);

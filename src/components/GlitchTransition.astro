@@ -6,11 +6,12 @@ export interface Props {
   className?: string;
 }
 
-const { 
-  intensity = 'medium', 
-  duration = 300, 
+const {
+  intensity = 'medium',
+  duration = 300,
   trigger = 'auto',
-  className = '' 
+  className = '',
+  ...rest
 } = Astro.props;
 
 const intensityMap = {
@@ -22,7 +23,7 @@ const intensityMap = {
 const glitchIntensity = intensityMap[intensity];
 ---
 
-<div class={`glitch-container ${className}`} data-trigger={trigger} data-duration={duration}>
+<div class={`glitch-container ${className}`} data-trigger={trigger} data-duration={duration} {...rest}>
   <slot />
 </div>
 

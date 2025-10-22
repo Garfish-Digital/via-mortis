@@ -12,18 +12,19 @@ export interface Props {
   className?: string;
 }
 
-const { 
-  title, 
-  description, 
-  image, 
-  date, 
+const {
+  title,
+  description,
+  image,
+  date,
   category = 'Attraction',
   href = '#',
-  className = ''
+  className = '',
+  ...rest
 } = Astro.props;
 ---
 
-<article class={`post-card ${className}`}>
+<article class={`post-card ${className}`} {...rest}>
   <DisplacementMap intensity={10} frequency={0.015} className="card-wrapper">
     <div class="card-inner">
       {image && (
