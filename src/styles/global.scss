@@ -1,6 +1,6 @@
 @import 'variables';
 @import 'glitch-effects';
-@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Nosifer&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap');
 
 // Global Reset and Base Styles
 * {
@@ -14,6 +14,8 @@ html {
   background-color: $pure-black;
   color: $ghost-white;
   overflow-x: hidden;
+  -ms-overflow-style: none; // IE 10+
+  scrollbar-width: none; // Firefox
 }
 
 body {
@@ -26,6 +28,8 @@ body {
   min-height: 100vh;
   line-height: 1.6;
   position: relative;
+  -ms-overflow-style: none; // IE 10+
+  scrollbar-width: none; // Firefox
   
   &::before {
     content: '';
@@ -60,7 +64,6 @@ h1 {
 }
 
 h2 {
-  font-family: 'Nosifer', cursive;
   font-size: clamp(2rem, 6vw, 4rem);
   color: $secondary-scream;
   text-shadow:
@@ -95,11 +98,11 @@ p {
 }
 
 .section {
-  padding: 4rem 0;
+  padding: 4rem 1rem;
   position: relative;
   
   @media (max-width: $tablet) {
-    padding: 2rem 0;
+    padding: 2rem .5rem;
   }
 }
 
@@ -180,22 +183,12 @@ a {
   }
 }
 
-// Scrollbar Styling
+// Scrollbar Hiding (Cross-browser)
+// Chrome, Safari, Edge, and Opera
 ::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: $shadow-gray;
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, $primary-blood, $primary-dark);
-  border-radius: 4px;
-  
-  &:hover {
-    background: linear-gradient(to bottom, $secondary-scream, $accent-brass);
-  }
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 // Loading States
@@ -252,3 +245,8 @@ a {
   outline: 2px solid $secondary-scream;
   outline-offset: 2px;
 }
+
+// .deadTest {
+//   font-stretch: narrower;
+//   initial-letter: 'sunken';
+// }

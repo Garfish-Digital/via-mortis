@@ -1,4 +1,6 @@
 ---
+import GraveyardOverlay from '../components/GraveyardOverlay.astro';
+
 export interface Props {
   title: string;
   description?: string;
@@ -35,7 +37,7 @@ const { title, description = "Via Mortis - Macabre Tourism & Haunted Attractions
     /* Critical CSS for loading states */
     body {
       margin: 0;
-      padding: 0;
+      padding: 0 1rem;
       background: #000;
       color: #f8f8f8;
       overflow-x: hidden;
@@ -140,6 +142,9 @@ const { title, description = "Via Mortis - Macabre Tourism & Haunted Attractions
   <main id="main-content" class="ct-scanlines">
     <slot />
   </main>
+
+  <!-- Graveyard Overlay Effect -->
+  <GraveyardOverlay />
 
   <!-- Global Styles -->
   <style lang="scss">

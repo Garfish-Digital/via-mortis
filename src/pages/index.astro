@@ -11,7 +11,7 @@ import PostCard from "../components/PostCard.astro";
   <!-- Hero Section -->
   <section class="hero fullscreen">
     <div class="hero-content">
-      <div class="hero-title-wrapper">
+      <div class="hero-title-wrapper" data-destructible>
         <h1>Via Mortis</h1>
       </div>
 
@@ -19,6 +19,7 @@ import PostCard from "../components/PostCard.astro";
         intensity={20}
         frequency={0.025}
         className="hero-subtitle"
+        data-destructible
       >
         <GlitchTransition
           trigger="auto"
@@ -46,7 +47,7 @@ import PostCard from "../components/PostCard.astro";
       />
 
       <div class="hero-cta">
-        <button class="cta-button">Enter the Darkness</button>
+        <button class="cta-button" data-graveyard-trigger>Enter the Darkness</button>
       </div>
     </div>
 
@@ -56,12 +57,13 @@ import PostCard from "../components/PostCard.astro";
   <!-- Tap List Section -->
   <section class="section tap-list ct-scanlines">
     <div class="container">
-      <GlitchTransition trigger="scroll" intensity="medium">
+      <GlitchTransition trigger="scroll" intensity="medium" data-destructible>
         <h2>Haunted Attractions</h2>
       </GlitchTransition>
 
       <div class="attractions-grid">
         <PostCard
+          data-destructible
           title="The Screaming Cellar"
           description="Descend into madness where the walls themselves cry out in agony. Experience the terror of being trapped beneath the earth with only your fears for company."
           image="/dungeon-stairwell-2.jpg"
@@ -71,6 +73,7 @@ import PostCard from "../components/PostCard.astro";
         />
 
         <PostCard
+          data-destructible
           title="Mirror Maze of Souls"
           description="Navigate through an endless labyrinth of distorted reflections. Each mirror shows not what you are, but what you could become."
           image="/mirror-1.jpg"
@@ -80,6 +83,7 @@ import PostCard from "../components/PostCard.astro";
         />
 
         <PostCard
+          data-destructible
           title="Extreme Hauntings"
           description="Step into the operating room where the boundary between healing and harm was forever blurred. The doctor will see you now."
           image="/stairwell-2.jpg"
@@ -89,6 +93,7 @@ import PostCard from "../components/PostCard.astro";
         />
 
         <PostCard
+          data-destructible
           title="Surgeon's Theatre"
           description="Step into the operating room where the boundary between healing and harm was forever blurred. The doctor will see you now."
           image="/medical-1.webp"
@@ -98,6 +103,7 @@ import PostCard from "../components/PostCard.astro";
         />
 
         <PostCard
+          data-destructible
           title="Famous Crimes"
           description="Step into the operating room where the boundary between healing and harm was forever blurred. The doctor will see you now."
           image="/crime-scene-1.webp"
@@ -107,6 +113,7 @@ import PostCard from "../components/PostCard.astro";
         />
 
         <PostCard
+          data-destructible
           title="The Midnight Seance"
           description="Commune with the restless spirits that refuse to cross over. Some conversations are meant to be one-sided."
           image="/ouija.webp"
@@ -123,26 +130,26 @@ import PostCard from "../components/PostCard.astro";
     <div class="container">
       <div class="story-content">
         <DisplacementMap intensity={12} frequency={0.02} className="story-text">
-          <GlitchTransition trigger="scroll" intensity="low">
+          <GlitchTransition trigger="scroll" intensity="low" data-destructible>
             <h2>Our Cursed History</h2>
           </GlitchTransition>
 
           <div class="story-paragraphs">
-            <p>
+            <p data-destructible>
               In the shadow of forgotten streets, where the veil between worlds
               grows thin, stands our collection of cursed curiosities. Each
               attraction tells a tale of those who dared to venture where mortal
               souls were never meant to tread.
             </p>
 
-            <p>
+            <p data-destructible>
               Since 1987, we have been the custodians of the macabre, the
               guardians of experiences that chill the blood and quicken the
               pulse. Our visitors leave forever changed, carrying with them
               memories that blur the line between nightmare and reality.
             </p>
 
-            <p>
+            <p data-destructible>
               The building itself seems to hunger for new souls, its walls
               absorbing the screams and laughter of countless guests. Some say
               the attraction chooses its visitors, drawing them from miles
@@ -151,23 +158,23 @@ import PostCard from "../components/PostCard.astro";
           </div>
         </DisplacementMap>
 
-        <div class="story-image">
-          <img src="/public/images/building.jpg" alt="Our haunted history" />
+        <div class="story-image" data-destructible>
+          <img src="/public/building.jpg" alt="Our haunted history" />
           <div class="story-image-overlay"></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Taproom/Events Section -->
+  <!-- Events Section -->
   <section class="section events-section">
     <div class="container">
-      <GlitchTransition trigger="scroll" intensity="medium">
+      <GlitchTransition trigger="scroll" intensity="medium" data-destructible>
         <h2>Upcoming Horrors</h2>
       </GlitchTransition>
 
       <div class="events-calendar">
-        <div class="event-card">
+        <div class="event-card event-card-1" data-destructible>
           <div class="event-date">
             <span class="day">13</span>
             <span class="month">Oct</span>
@@ -181,11 +188,11 @@ import PostCard from "../components/PostCard.astro";
             <span class="event-time">11:30 PM - 2:00 AM</span>
           </div>
           <div class="event-cta">
-            <button class="event-button">Book Now</button>
+            <button class="event-button" data-graveyard-trigger>Book Now</button>
           </div>
         </div>
 
-        <div class="event-card">
+        <div class="event-card event-card-2" data-destructible>
           <div class="event-date">
             <span class="day">31</span>
             <span class="month">Oct</span>
@@ -199,11 +206,11 @@ import PostCard from "../components/PostCard.astro";
             <span class="event-time">6:00 PM - 3:00 AM</span>
           </div>
           <div class="event-cta">
-            <button class="event-button">Reserve</button>
+            <button class="event-button" data-graveyard-trigger>Reserve</button>
           </div>
         </div>
 
-        <div class="event-card">
+        <div class="event-card event-card-3" data-destructible>
           <div class="event-date">
             <span class="day">02</span>
             <span class="month">Nov</span>
@@ -217,7 +224,7 @@ import PostCard from "../components/PostCard.astro";
             <span class="event-time">9:00 PM - 11:00 PM</span>
           </div>
           <div class="event-cta">
-            <button class="event-button">Join</button>
+            <button class="event-button" data-graveyard-trigger>Join</button>
           </div>
         </div>
       </div>
@@ -229,14 +236,14 @@ import PostCard from "../components/PostCard.astro";
     <div class="container">
       <div class="contact-content">
         <div class="contact-info">
-          <GlitchTransition trigger="hover" intensity="low">
+          <GlitchTransition trigger="hover" intensity="low" data-destructible>
             <h3>Find Your Way to Damnation</h3>
           </GlitchTransition>
 
-          <div class="contact-details">
+          <div class="contact-details" data-destructible>
             <div class="detail-item">
               <span class="detail-label">Address:</span>
-              <span class="detail-value">666 Nightmare Lane, Shadow Valley</span
+              <span class="detail-value">219 Nightmare Lane, Shadow Valley</span
               >
             </div>
             <div class="detail-item">
@@ -250,7 +257,7 @@ import PostCard from "../components/PostCard.astro";
           </div>
         </div>
 
-        <div class="warning-notice">
+        <div class="warning-notice" data-destructible>
           <h4>⚠️ Warning</h4>
           <p>
             Via Mortis is not responsible for psychological trauma, existential
@@ -258,7 +265,7 @@ import PostCard from "../components/PostCard.astro";
             your own risk.
           </p>
           <div class="hero-cta">
-            <button class="cta-button">Please take me</button>
+            <button class="cta-button" data-graveyard-trigger data-destruction-trigger data-destructible>Please take me</button>
           </div>
         </div>
       </div>
@@ -405,12 +412,14 @@ import PostCard from "../components/PostCard.astro";
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2rem;
     margin-top: 3rem;
+    padding: 0 1rem;
   }
 
   /* Our Story Section */
   .our-story {
     background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
-    padding: 6rem 0;
+    padding: 6rem 1rem 6rem 0;
+    margin-top: 2rem;
   }
 
   .story-content {
@@ -425,7 +434,7 @@ import PostCard from "../components/PostCard.astro";
   }
 
   .story-paragraphs p {
-    margin-bottom: 1.5rem;
+    margin: 1.5rem 0 0 1rem;
     font-size: 1.1rem;
     line-height: 1.8;
     color: #f8f8f8;
@@ -482,7 +491,7 @@ import PostCard from "../components/PostCard.astro";
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
-    margin-top: 3rem;
+    margin: 3rem 1rem 0 1rem;
   }
 
   .event-card {
@@ -495,6 +504,72 @@ import PostCard from "../components/PostCard.astro";
     gap: 1.5rem;
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Background image layer with ghostly filters - BOTTOM LAYER (z-index: 0) */
+  .event-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+    transition: filter 0.3s ease;
+  }
+
+  /* Dark overlay for readability - MIDDLE LAYER (z-index: 1) */
+  .event-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+    transition: background 0.3s ease;
+  }
+
+  /* Ensure content stays above background - TOP LAYER (z-index: 2) */
+  .event-card > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Event Card 1 - tour-1.jpg - Ghostly Red Hue */
+  .event-card-1::after {
+    background-image: url('/tour-1.jpg');
+    filter: grayscale(50%) sepia(40%) hue-rotate(-10deg) opacity(0.85);
+  }
+
+  .event-card-1:hover::after {
+    filter: grayscale(20%) sepia(60%) hue-rotate(0deg) opacity(1) brightness(1.1);
+  }
+
+  /* Event Card 2 - tour-2.avif - Ghostly Green/Yellow Tint */
+  .event-card-2::after {
+    background-image: url('/tour-2.avif');
+    filter: grayscale(60%) sepia(30%) hue-rotate(40deg) opacity(0.8) contrast(1.1);
+  }
+
+  .event-card-2:hover::after {
+    filter: grayscale(15%) sepia(50%) hue-rotate(50deg) opacity(1) contrast(1.2) brightness(1.15);
+  }
+
+  /* Event Card 3 - tour-3.jpg - Ghostly Blue/Inverted Tint */
+  .event-card-3::after {
+    background-image: url('/tour-3.jpg');
+    filter: grayscale(70%) sepia(20%) invert(5%) opacity(0.75) contrast(1.2);
+  }
+
+  .event-card-3:hover::after {
+    filter: grayscale(25%) sepia(40%) invert(8%) opacity(1) contrast(1.3) brightness(1.1);
   }
 
   .event-card:hover {
@@ -503,6 +578,10 @@ import PostCard from "../components/PostCard.astro";
     box-shadow:
       0 10px 30px rgba(233, 0, 0, 0.2),
       0 0 50px rgba(187, 255, 0, 0.1);
+  }
+
+  .event-card:hover::before {
+    background: rgba(0, 0, 0, 0.5);
   }
 
   .event-date {
@@ -547,7 +626,8 @@ import PostCard from "../components/PostCard.astro";
 
   .event-time {
     font-size: 0.8rem;
-    color: #4b4b01;
+    color: #bbff00;
+    /* color: #4b4b01; */
     font-family: "Fira Code", monospace;
   }
 
@@ -555,12 +635,66 @@ import PostCard from "../components/PostCard.astro";
     padding: 0.75rem 1.5rem;
     font-size: 0.9rem;
     white-space: nowrap;
+
+    /* Gravestone style */
+    background: linear-gradient(135deg, #3a3a3a 0%, #4a4a4a 50%, #3a3a3a 100%);
+    border: 1px solid #2a2a2a;
+    color: #1a1a1a;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+
+    /* Chiseled/engraved text effect */
+    text-shadow:
+      0 1px 1px rgba(255, 255, 255, 0.15),
+      0 -1px 1px rgba(0, 0, 0, 0.6);
+
+    /* Stone depth effect */
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+      0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .event-button:hover {
+    /* Brighter moonlit stone */
+    background: linear-gradient(135deg, #4a4a4a 0%, #5a5a5a 50%, #4a4a4a 100%);
+    color: #2a2a2a;
+    border-color: #bbff00;
+
+    /* Enhanced engraving on hover */
+    text-shadow:
+      0 1px 2px rgba(255, 255, 255, 0.2),
+      0 -1px 2px rgba(0, 0, 0, 0.7);
+
+    /* Ghostly glow */
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.15),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.6),
+      0 2px 6px rgba(0, 0, 0, 0.4),
+      0 0 15px rgba(187, 255, 0, 0.3),
+      0 0 30px rgba(187, 255, 0, 0.15);
+
+    /* Slight lift like stone rising */
+    transform: translateY(-2px);
+  }
+
+  .event-button:active {
+    /* Pressed into stone */
+    transform: translateY(0);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.05),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.7),
+      0 1px 2px rgba(0, 0, 0, 0.3);
   }
 
   /* Contact Section */
   .contact-section {
     background: linear-gradient(135deg, #1a1a1a 0%, #000 50%, #1a1a1a 100%);
-    padding: 6rem 0;
+    padding: 6rem 1rem 6rem 0;
   }
 
   .contact-content {
@@ -579,6 +713,7 @@ import PostCard from "../components/PostCard.astro";
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    margin-left: 1rem;
   }
 
   .detail-item {
@@ -621,6 +756,198 @@ import PostCard from "../components/PostCard.astro";
     opacity: 0.9;
   }
 
+  /* Blood Drip Stream 0 Width Override - EXPERIMENTAL */
+  /* Stream 0 (left stream at 20%) - Make it wider */
+  .hero-blood-effect :global([data-stream="0"]) {
+    width: 24px !important; /* Double the container width */
+  }
+
+  .hero-blood-effect :global([data-stream="0"] .drip-stream) {
+    width: 8px !important; /* Start wider (default is 2px) */
+    animation-name: stream-grow-wide;
+  }
+
+  /* Custom wider animation for Stream 0 */
+  @keyframes stream-grow-wide {
+    0% {
+      height: 0;
+      opacity: 0;
+      width: 10px;
+      clip-path: polygon(45% 0%, 55% 0%, 100% 100%, 0% 100%);
+    }
+    20% {
+      height: 15vh;
+      opacity: 0.4;
+      width: 11px;
+      clip-path: polygon(42% 0%, 58% 0%, 100% 100%, 0% 100%);
+    }
+    40% {
+      height: 35vh;
+      opacity: 0.6;
+      width: 12px;
+      clip-path: polygon(40% 0%, 60% 0%, 95% 100%, 5% 100%);
+    }
+    60% {
+      height: 55vh;
+      opacity: 0.75;
+      width: 13px;
+      clip-path: polygon(38% 0%, 62% 0%, 90% 100%, 10% 100%);
+    }
+    80% {
+      height: 75vh;
+      opacity: 0.85;
+      width: 14px;
+      clip-path: polygon(35% 0%, 65% 0%, 85% 100%, 15% 100%);
+    }
+    100% {
+      height: 90vh;
+      opacity: 0.9;
+      width: 16px;
+      clip-path: polygon(30% 0%, 70% 0%, 80% 100%, 20% 100%);
+    }
+  }
+
+  /* Destruction Animations - Fall Effects */
+  @keyframes fall-straight {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 1;
+    }
+    10% {
+      transform: translateY(50px) rotate(2deg);
+      opacity: 1;
+    }
+    30% {
+      transform: translateY(200px) rotate(-3deg);
+      opacity: 0.9;
+    }
+    50% {
+      transform: translateY(500px) rotate(4deg);
+      opacity: 0.7;
+    }
+    70% {
+      transform: translateY(900px) rotate(-2deg);
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateY(1500px) rotate(5deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes fall-hinge-left {
+    0% {
+      transform-origin: top left;
+      transform: rotate(0deg);
+      opacity: 1;
+    }
+    15% {
+      transform: rotate(15deg);
+      opacity: 1;
+    }
+    30% {
+      transform: rotate(-10deg);
+      opacity: 1;
+    }
+    45% {
+      transform: rotate(20deg);
+      opacity: 1;
+    }
+    60% {
+      transform: rotate(-5deg) translateY(300px);
+      opacity: 0.9;
+    }
+    80% {
+      transform: rotate(25deg) translateY(800px);
+      opacity: 0.5;
+    }
+    100% {
+      transform: rotate(45deg) translateY(1500px) translateX(-200px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes fall-hinge-right {
+    0% {
+      transform-origin: top right;
+      transform: rotate(0deg);
+      opacity: 1;
+    }
+    15% {
+      transform: rotate(-15deg);
+      opacity: 1;
+    }
+    30% {
+      transform: rotate(10deg);
+      opacity: 1;
+    }
+    45% {
+      transform: rotate(-20deg);
+      opacity: 1;
+    }
+    60% {
+      transform: rotate(5deg) translateY(300px);
+      opacity: 0.9;
+    }
+    80% {
+      transform: rotate(-25deg) translateY(800px);
+      opacity: 0.5;
+    }
+    100% {
+      transform: rotate(-45deg) translateY(1500px) translateX(200px);
+      opacity: 0;
+    }
+  }
+
+  /* Destruction animation classes */
+  .destructible-falling {
+    position: fixed !important;
+    z-index: 10000 !important;
+    will-change: transform, opacity;
+    pointer-events: none;
+  }
+
+  .fall-straight-active {
+    animation: fall-straight 2s ease-in forwards;
+  }
+
+  .fall-hinge-left-active {
+    animation: fall-hinge-left 2s ease-in forwards;
+  }
+
+  .fall-hinge-right-active {
+    animation: fall-hinge-right 2s ease-in forwards;
+  }
+
+  /* Button charging effect */
+  @keyframes button-charge {
+    0% {
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+        0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    50% {
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.6),
+        0 0 20px rgba(233, 0, 0, 0.8),
+        0 0 40px rgba(233, 0, 0, 0.6),
+        0 0 60px rgba(233, 0, 0, 0.4);
+      transform: scale(1.05);
+    }
+    100% {
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+        0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  .button-charging {
+    animation: button-charge 500ms ease-in-out;
+  }
+
   /* Responsive Design */
   @media (max-width: 768px) {
     .hero-content {
@@ -652,3 +979,92 @@ import PostCard from "../components/PostCard.astro";
     }
   }
 </style>
+
+<script>
+  class SiteDestruction {
+    private isDestroying: boolean = false;
+    private fallTypes = ['fall-straight', 'fall-hinge-left', 'fall-hinge-right'];
+
+    init() {
+      // Listen for destruction trigger button
+      document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        const trigger = target.closest('[data-destruction-trigger]');
+
+        if (trigger && !this.isDestroying) {
+          e.preventDefault();
+          e.stopPropagation();
+          this.triggerDestruction(trigger as HTMLElement);
+        }
+      });
+    }
+
+    triggerDestruction(button: HTMLElement) {
+      this.isDestroying = true;
+
+      // Phase 1: Button charging effect (500ms)
+      button.classList.add('button-charging');
+
+      setTimeout(() => {
+        button.classList.remove('button-charging');
+
+        // Phase 2: Start destruction sequence
+        this.destroyElements();
+
+        // Phase 3: Hard reload after 10 seconds
+        setTimeout(() => {
+          window.location.reload();
+        }, 10000);
+      }, 500);
+    }
+
+    destroyElements() {
+      // Get all destructible elements
+      const elements = document.querySelectorAll<HTMLElement>('[data-destructible]');
+      const elementsArray = Array.from(elements);
+
+      elementsArray.forEach((element) => {
+        // Random fall type (33% each)
+        const randomFallType = this.fallTypes[Math.floor(Math.random() * this.fallTypes.length)];
+
+        // Random start delay between 0-8000ms
+        const randomDelay = Math.random() * 8000;
+
+        setTimeout(() => {
+          this.makeElementFall(element, randomFallType);
+        }, randomDelay);
+      });
+    }
+
+    makeElementFall(element: HTMLElement, fallType: string) {
+      // Get current position before making it fixed
+      const rect = element.getBoundingClientRect();
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+
+      // Apply fixed positioning with current location
+      element.classList.add('destructible-falling');
+      element.style.top = `${rect.top + scrollTop}px`;
+      element.style.left = `${rect.left + scrollLeft}px`;
+      element.style.width = `${rect.width}px`;
+      element.style.height = `${rect.height}px`;
+
+      // Small delay to ensure styles are applied
+      requestAnimationFrame(() => {
+        element.classList.add(`${fallType}-active`);
+      });
+    }
+  }
+
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    const destruction = new SiteDestruction();
+    destruction.init();
+  });
+
+  // Re-initialize on Astro page transitions
+  document.addEventListener('astro:page-load', () => {
+    const destruction = new SiteDestruction();
+    destruction.init();
+  });
+</script>

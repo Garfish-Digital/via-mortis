@@ -48,10 +48,10 @@ const {
         <p class="card-description">{description}</p>
         
         <div class="card-footer">
-          <a href={href} class="read-more">
+          <button class="read-more" data-graveyard-trigger>
             Enter If You Dare
             <span class="arrow">→</span>
-          </a>
+          </button>
         </div>
       </div>
       
@@ -293,7 +293,11 @@ const {
     letter-spacing: 0.05em;
     transition: all 0.3s ease;
     padding: 0.5rem 0;
+    border: none;
     border-bottom: 1px solid transparent;
+    background: transparent;
+    cursor: pointer;
+    font-family: inherit;
   }
 
   .read-more:hover {

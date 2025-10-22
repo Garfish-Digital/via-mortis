@@ -33,8 +33,18 @@ const glitchIntensity = intensityMap[intensity];
     overflow: hidden;
     color: #bbff00;
     font-size: clamp(1.2rem, 2vw, 3rem);
-
+    font-family: Impact, Haettenschweiler, sans-serif;
+    transform: scaleY(2);
+    padding: 0 1rem;
   }
+
+  .glitch-container h2 {
+  color: $secondary-scream;
+
+  text-shadow:
+    0 0 8px $secondary-scream,
+    0 0 16px $secondary-scream;
+}
 
   .glitch-container.active {
     animation: sophisticated-glitch var(--duration) ease-in-out;

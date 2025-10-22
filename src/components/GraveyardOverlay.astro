@@ -1,0 +1,252 @@
+---
+// Graveyard overlay component with glitch effect
+// Triggered by buttons with data-graveyard-trigger attribute
+---
+
+<div id="graveyard-overlay" class="graveyard-overlay">
+  <div class="graveyard-image"></div>
+</div>
+
+<style>
+  .graveyard-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 500ms ease-in-out;
+  }
+
+  /* Ensure body/html allow full height positioning */
+  :global(body) {
+    position: relative;
+    min-height: 100%;
+  }
+
+  .graveyard-overlay.active {
+    opacity: 1;
+  }
+
+  .graveyard-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/graveyard.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* Green violent shudder effect - applied at 1500ms */
+  .graveyard-overlay.shuddering .graveyard-image {
+    animation: violent-shudder 500ms ease-in-out;
+  }
+
+  @keyframes violent-shudder {
+    0% {
+      transform: translate(0, 0) rotate(0deg);
+      filter: hue-rotate(0deg) contrast(1) brightness(1);
+    }
+    10% {
+      transform: translate(-8px, 4px) rotate(-2deg);
+      filter: hue-rotate(90deg) contrast(1.5) brightness(0.8);
+    }
+    20% {
+      transform: translate(12px, -6px) rotate(3deg);
+      filter: hue-rotate(180deg) contrast(0.8) brightness(1.3);
+    }
+    30% {
+      transform: translate(-6px, 8px) rotate(-1deg);
+      filter: hue-rotate(270deg) contrast(1.3) brightness(0.9);
+    }
+    40% {
+      transform: translate(10px, -4px) rotate(2deg);
+      filter: hue-rotate(360deg) contrast(0.7) brightness(1.4);
+    }
+    50% {
+      transform: translate(-14px, 6px) rotate(-3deg);
+      filter: hue-rotate(45deg) contrast(1.8) brightness(0.7);
+    }
+    60% {
+      transform: translate(8px, -10px) rotate(1deg);
+      filter: hue-rotate(135deg) contrast(1.2) brightness(1.2);
+    }
+    70% {
+      transform: translate(-4px, 12px) rotate(-2deg);
+      filter: hue-rotate(225deg) contrast(0.9) brightness(0.95);
+    }
+    80% {
+      transform: translate(6px, -8px) rotate(3deg);
+      filter: hue-rotate(315deg) contrast(1.4) brightness(1.1);
+    }
+    90% {
+      transform: translate(-10px, 4px) rotate(-1deg);
+      filter: hue-rotate(180deg) contrast(1.1) brightness(0.9);
+    }
+    100% {
+      transform: translate(0, 0) rotate(0deg);
+      filter: hue-rotate(0deg) contrast(1) brightness(1);
+    }
+  }
+
+  /* Green color channel effect */
+  .graveyard-overlay.shuddering .graveyard-image::before,
+  .graveyard-overlay.shuddering .graveyard-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/graveyard.jpg');
+    background-size: cover;
+    background-position: center;
+    mix-blend-mode: screen;
+    opacity: 0.6;
+  }
+
+  .graveyard-overlay.shuddering .graveyard-image::before {
+    animation: glitch-channel-red 500ms ease-in-out;
+  }
+
+  .graveyard-overlay.shuddering .graveyard-image::after {
+    animation: glitch-channel-green 500ms ease-in-out;
+  }
+
+  @keyframes glitch-channel-red {
+    0% {
+      transform: translateX(0);
+      filter: sepia(1) hue-rotate(-50deg) saturate(5);
+      opacity: 0.8;
+    }
+    25% {
+      transform: translateX(4px);
+      opacity: 0.9;
+    }
+    50% {
+      transform: translateX(-3px);
+      opacity: 0.7;
+    }
+    75% {
+      transform: translateX(2px);
+      opacity: 0.85;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes glitch-channel-green {
+    0% {
+      transform: translateX(0);
+      filter: sepia(1) hue-rotate(50deg) saturate(5);
+      opacity: 0.6;
+    }
+    20% {
+      transform: translateX(-4px);
+      opacity: 0.8;
+    }
+    40% {
+      transform: translateX(6px);
+      opacity: 0.5;
+    }
+    60% {
+      transform: translateX(-2px);
+      opacity: 0.75;
+    }
+    80% {
+      transform: translateX(3px);
+      opacity: 0.65;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 0.6;
+    }
+  }
+
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .graveyard-overlay,
+    .graveyard-image {
+      animation: none !important;
+      transition: none !important;
+    }
+
+    .graveyard-overlay.shuddering .graveyard-image::before,
+    .graveyard-overlay.shuddering .graveyard-image::after {
+      animation: none !important;
+    }
+  }
+</style>
+
+<script>
+  class GraveyardEffect {
+    private overlay: HTMLElement | null;
+    private isAnimating: boolean = false;
+
+    constructor() {
+      this.overlay = document.getElementById('graveyard-overlay');
+      this.init();
+    }
+
+    init() {
+      // Listen for clicks on any element with data-graveyard-trigger
+      document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        const trigger = target.closest('[data-graveyard-trigger]');
+
+        // Skip if this is the destruction trigger button
+        const isDestructionTrigger = trigger?.hasAttribute('data-destruction-trigger');
+
+        if (trigger && !this.isAnimating && !isDestructionTrigger) {
+          e.preventDefault();
+          this.triggerEffect();
+        }
+      });
+    }
+
+    triggerEffect() {
+      if (!this.overlay || this.isAnimating) return;
+
+      this.isAnimating = true;
+
+      // Phase 1: Fade in overlay (0ms - 500ms)
+      this.overlay.classList.add('active');
+
+      // Phase 2: Start green shudder at 1500ms (runs for 500ms)
+      setTimeout(() => {
+        this.overlay?.classList.add('shuddering');
+      }, 1500);
+
+      // Phase 3: Scroll to bottom at 2200ms
+      setTimeout(() => {
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: 'smooth'
+        });
+      }, 2200);
+
+      // Cleanup: Remove overlay at 2200ms (after shudder completes)
+      setTimeout(() => {
+        this.overlay?.classList.remove('active', 'shuddering');
+        this.isAnimating = false;
+      }, 2200);
+    }
+  }
+
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    new GraveyardEffect();
+  });
+
+  // Re-initialize on Astro page transitions
+  document.addEventListener('astro:page-load', () => {
+    new GraveyardEffect();
+  });
+</script>
