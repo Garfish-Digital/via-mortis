@@ -77,7 +77,7 @@ const { title, description = "Via Mortis - Macabre Tourism & Haunted Attractions
         #490000 75%
       );
       background-size: 20px 20px;
-      animation: glitch-load 2s infinite;
+      animation: fade-in 2000ms ease-out, glitch-load 2s infinite;
       position: relative;
     }
     
@@ -94,6 +94,15 @@ const { title, description = "Via Mortis - Macabre Tourism & Haunted Attractions
       text-shadow: 0 0 10px #bbff00;
     }
     
+    @keyframes fade-in {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
     @keyframes glitch-load {
       0% {
         filter: brightness(1) contrast(1);
