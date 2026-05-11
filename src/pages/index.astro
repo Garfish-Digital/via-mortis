@@ -1,93 +1,77 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import GlitchTransition from "../components/GlitchTransition.astro";
-import DisplacementMap from "../components/displacementMap.astro";
-// import PourAnimation from '../components/PourAnimation.astro';
-import BloodDrip from "../components/BloodDrip.astro";
 import PostCard from "../components/PostCard.astro";
+import LouverStrip from "../components/LouverStrip.astro";
 ---
 
 <BaseLayout title="Via Mortis - Macabre Tourism & Haunted Attractions">
   <!-- Hero Section -->
-  <section class="hero fullscreen">
-    <div class="hero-content">
-      <div class="hero-title-wrapper" data-destructible>
+  <section class="hero fullscreen" data-ghost-hero>
+    <div class="hero-content ghost-real-content" style="opacity:0">
+      <div class="hero-title-wrapper">
         <h1>Via Mortis</h1>
       </div>
 
-      <DisplacementMap
-        intensity={20}
-        frequency={0.025}
-        className="hero-subtitle"
-        data-destructible
-      >
-        <GlitchTransition
-          trigger="auto"
-          intensity="high"
-          className="hero-title"
-          data-destructible
-        >
+      <div class="hero-subtitle">
           <p>Where the curious come to rest</p>
-        </GlitchTransition>
-      </DisplacementMap>
-     
-      <BloodDrip
-        streamCount={2}
-        intensity="medium"
-        className="hero-blood-effect"
-      />
-
-      <div class="hero-cta">
-        <button class="cta-button" data-graveyard-trigger>Enter the Darkness</button>
       </div>
+
     </div>
 
     <div class="hero-fog"></div>
   </section>
 
-  <!-- Tap List Section -->
-  <section class="section tap-list ct-scanlines">
-    <div class="container">
-      <GlitchTransition trigger="scroll" intensity="medium" data-destructible>
-        <h2>Haunted Attractions</h2>
-      </GlitchTransition>
+  <!-- Louver 1 — After Hero -->
+  <LouverStrip
+    image="/assets/images/parallax-strips/face-1.webp"
+    slitHeights={[130, 90, 160, 100, 140]}
+    gapHeights={[80, 90, 70, 85]}
+    parallaxDirection="diagonal-right"
+    className="louver-1"
+  />
+
+  <!-- Haunted attractions Section -->
+  <section class="section tap-list" data-ghost-reveal>
+    <div class="container ghost-real-content">
+      <h2>Haunted Attractions</h2>
 
       <div class="attractions-grid">
         <PostCard
           data-destructible
           title="The Screaming Cellar"
-          description="Descend into madness where the walls themselves cry out in agony. Experience the terror of being trapped beneath the earth with only your fears for company."
-          image="/dungeon-stairwell-2.jpg"
+          description="They sealed the cellar in 1903 after the last surveyor refused to describe what he'd found. We unsealed it. The stairs go further down than the building plans suggest."
+          image="/assets/images/attractions/dungeon-stairwell.webp"
           date="Est. 1887"
-          category="Haunted Tour"
+          category="Subterranean Tour"
           href="/attractions/screaming-cellar"
         />
 
         <PostCard
           data-destructible
           title="Mirror Maze of Souls"
-          description="Navigate through an endless labyrinth of distorted reflections. Each mirror shows not what you are, but what you could become."
-          image="/mirror-1.jpg"
+          description="The mirrors were recovered from a condemned psychiatric facility in Vienna. Staff reported that reflections would continue moving after patients had left the room."
+          image="/assets/images/attractions/mirror.webp"
           date="Est. 1923"
-          category="Interactive Horror"
+          category="Perceptual Horror"
           href="/attractions/mirror-maze"
         />
 
         <PostCard
           data-destructible
           title="Extreme Hauntings"
-          description="Step into the operating room where the boundary between healing and harm was forever blurred. The doctor will see you now."
-          image="/stairwell-2.jpg"
-          date="Est. 1902"
-          category="Extreme Hauntings"
-          href="/attractions/surgeons-theatre"
+          description="Our most restricted experience. Requires a signed waiver and a companion. We have never disclosed what happens inside. The 40% completion rate speaks for itself."
+          image="/assets/images/attractions/house-stairwell.webp"
+          date="By appointment"
+          category="Extreme Experience"
+          href="/attractions/extreme-hauntings"
         />
 
         <PostCard
           data-destructible
           title="Surgeon's Theatre"
-          description="Step into the operating room where the boundary between healing and harm was forever blurred. The doctor will see you now."
-          image="/medical-1.webp"
+          description="Dr. Ashworth's operating theatre has been preserved exactly as it was found — instruments laid out, table stained, the overhead lamp still warm. He was never apprehended."
+          image="/assets/images/attractions/medical.webp"
           date="Est. 1902"
           category="Medical Horror"
           href="/attractions/surgeons-theatre"
@@ -96,167 +80,290 @@ import PostCard from "../components/PostCard.astro";
         <PostCard
           data-destructible
           title="Famous Crimes"
-          description="Step into the operating room where the boundary between healing and harm was forever blurred. The doctor will see you now."
-          image="/crime-scene-1.webp"
-          date="Est. 1902"
-          category="Famous Crimes"
-          href="/attractions/surgeons-theatre"
+          description="Walk the reconstructed scenes of crimes that were never solved. Every detail is forensically accurate. Some visitors report noticing details that have since vanished."
+          image="/assets/images/attractions/crime-scene.webp"
+          date="Rotating exhibits"
+          category="True Crime"
+          href="/attractions/famous-crimes"
         />
 
         <PostCard
           data-destructible
-          title="The Midnight Seance"
-          description="Commune with the restless spirits that refuse to cross over. Some conversations are meant to be one-sided."
-          image="/ouija.webp"
-          date="Nightly"
-          category="Paranormal Experience"
+          title="The Midnight Séance"
+          description="A genuine medium. A genuine circle. We make no claims about what will or will not respond. Sessions are recorded. You will receive your recording within 48 hours."
+          image="/assets/images/attractions/ouija.webp"
+          date="Nightly, midnight"
+          category="Paranormal"
           href="/attractions/midnight-seance"
         />
       </div>
     </div>
   </section>
 
+  <!-- Louver 2 — After Attractions -->
+  <LouverStrip
+    image="/assets/images/parallax-strips/hall.webp"
+    slitHeights={[90, 60, 130, 50, 115, 80]}
+    gapHeights={[70, 80, 65, 85, 75]}
+    parallaxDirection="diagonal-left"
+    className="louver-2"
+    data-multi-speed="true"
+  />
+
   <!-- Our Story Section -->
-  <section class="section our-story mist-effect">
-    <div class="container">
+  <section class="section our-story" data-ghost-reveal>
+    <div class="container ghost-real-content">
       <div class="story-content">
-        <DisplacementMap intensity={12} frequency={0.02} className="story-text">
-          <GlitchTransition trigger="scroll" intensity="low" data-destructible>
-            <h2>Our Cursed History</h2>
-          </GlitchTransition>
+        <div>
+          <h2>What Remains</h2>
 
           <div class="story-paragraphs">
             <p data-destructible>
-              In the shadow of forgotten streets, where the veil between worlds
-              grows thin, stands our collection of cursed curiosities. Each
-              attraction tells a tale of those who dared to venture where mortal
-              souls were never meant to tread.
+              The building at Glendower Avenue was condemned in 1959. It was
+              not purchased. It was inherited — by an organization that does not
+              appear in any public registry. Renovation began in 1987 and has
+              never officially ended.
             </p>
 
             <p data-destructible>
-              Since 1987, we have been the custodians of the macabre, the
-              guardians of experiences that chill the blood and quicken the
-              pulse. Our visitors leave forever changed, carrying with them
-              memories that blur the line between nightmare and reality.
+              We do not employ actors. We do not use props. Every artifact in
+              our collection is authentic, acquired through channels we are not
+              at liberty to discuss. The experiences you will have here are not
+              simulated.
             </p>
 
             <p data-destructible>
-              The building itself seems to hunger for new souls, its walls
-              absorbing the screams and laughter of countless guests. Some say
-              the attraction chooses its visitors, drawing them from miles
-              around with an inexplicable pull.
+              Previous visitors have reported lingering effects — a persistent
+              feeling of being observed, difficulty sleeping in dark rooms, an
+              aversion to mirrors. These reports have not been investigated. We
+              advise you to visit during daylight hours, though we are only open
+              after dark.
             </p>
           </div>
-        </DisplacementMap>
-
+          </div>
         <div class="story-image" data-destructible>
-          <img src="/building.jpg" alt="Our haunted history" />
+          <img src="/assets/images/about/building.webp" alt="219 Nightmare Lane" />
           <div class="story-image-overlay"></div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Louver 3 — After Our Story -->
+  <LouverStrip
+    image="/assets/images/parallax-strips/face-2.webp"
+    slitHeights={[170, 110, 130, 150]}
+    gapHeights={[90, 80, 85]}
+    parallaxDirection="horizontal"
+    className="louver-3"
+  />
+
+  <!-- Documented Observations Section -->
+  <section class="section observations-section" data-ghost-reveal>
+    <div class="container ghost-real-content">
+      <h2>Documented Observations</h2>
+
+      <div class="attractions-grid">
+        <PostCard
+          data-destructible
+          title="The Lower Corridor"
+          description='"The guide told us not to look at the end of the corridor on the lower level. I looked. I have not been able to describe it accurately to anyone."'
+          image="/assets/images/tours/tour-1.webp"
+          date="S. Harrow, Edinburgh · 14 Nov 2021"
+          category="Field Report"
+          href="#"
+        />
+
+        <PostCard
+          data-destructible
+          title="The Mirror Room"
+          description='"My husband and I disagree about what we saw in the mirror room. We have not discussed it since."'
+          image="/assets/images/tours/tour-2.webp"
+          date="L. Vane, Cardiff · 3 Feb 2022"
+          category="Field Report"
+          href="#"
+        />
+
+        <PostCard
+          data-destructible
+          title="Seven Figures"
+          description='"The photograph I took on the stairwell shows seven figures. There were four of us."'
+          image="/assets/images/tours/tour-3.webp"
+          date="R. Castellano, Turin · 2 Oct 2022"
+          category="Field Report"
+          href="#"
+        />
+
+        <PostCard
+          data-destructible
+          title="Emergency Protocol"
+          description='"I work in emergency medicine. I have seen things. This was different."'
+          image="/assets/images/tours/tour-4.webp"
+          date="M. Oduya, Lagos · 19 Aug 2023"
+          category="Field Report"
+          href="#"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Louver 5 — After Documented Observations -->
+  <LouverStrip
+    image="/assets/images/parallax-strips/scalpel.webp"
+    slitHeights={[130, 90, 160, 100, 140]}
+    gapHeights={[80, 90, 75, 85]}
+    parallaxDirection="diagonal-left"
+    className="louver-5"
+  />
+
   <!-- Events Section -->
-  <section class="section events-section">
-    <div class="container">
-      <GlitchTransition trigger="scroll" intensity="medium" data-destructible>
-        <h2>Upcoming Horrors</h2>
-      </GlitchTransition>
+  <section class="section events-section" data-ghost-reveal>
+    <div class="container ghost-real-content">
+      <h2>Upcoming Horrors</h2>
 
-      <div class="events-calendar">
-        <div class="event-card event-card-1" data-destructible>
-          <div class="event-date">
-            <span class="day">13</span>
-            <span class="month">Oct</span>
+      <div class="events-layout">
+        <div class="events-calendar">
+          <div class="event-card" data-destructible>
+            <div class="event-date">
+              <span class="day">27</span>
+              <span class="month">Aug</span>
+            </div>
+            <div class="event-details">
+              <h3>Hungry Ghost Festival</h3>
+              <p>
+                The veil thins on the seventh lunar month. We open the building
+                to any who wish to enter — and to any who cannot leave. Incense
+                will burn throughout. The doors will remain unlocked.
+              </p>
+              <span class="event-time">Dusk — Sunrise</span>
+            </div>
+            <div class="event-cta">
+              <button class="event-button">Enter</button>
+            </div>
           </div>
-          <div class="event-details">
-            <h3>Midnight Massacre Tour</h3>
-            <p>
-              Experience our most terrifying attraction after hours. Limited to
-              13 brave souls.
-            </p>
-            <span class="event-time">11:30 PM - 2:00 AM</span>
+
+          <div class="event-card" data-destructible>
+            <div class="event-date">
+              <span class="day">13</span>
+              <span class="month">Oct</span>
+            </div>
+            <div class="event-details">
+              <h3>Midnight Massacre Tour</h3>
+              <p>
+                Our most terrifying attraction after hours. Limited to 13
+                guests. No photography. No refunds.
+              </p>
+              <span class="event-time">11:30 PM — 2:00 AM</span>
+            </div>
+            <div class="event-cta">
+              <button class="event-button">Book Now</button
+              >
+            </div>
           </div>
-          <div class="event-cta">
-            <button class="event-button" data-graveyard-trigger>Book Now</button>
+
+          <div class="event-card" data-destructible>
+            <div class="event-date">
+              <span class="day">31</span>
+              <span class="month">Oct</span>
+            </div>
+            <div class="event-details">
+              <h3>All Hallows Descent</h3>
+              <p>
+                The one night per year we remove all safety protocols. Costumes
+                mandatory. Emergency exits will be clearly marked. We recommend
+                memorising their locations.
+              </p>
+              <span class="event-time">6:00 PM — 3:00 AM</span>
+            </div>
+            <div class="event-cta">
+              <button class="event-button">Reserve</button
+              >
+            </div>
+          </div>
+
+          <div class="event-card" data-destructible>
+            <div class="event-date">
+              <span class="day">02</span>
+              <span class="month">Nov</span>
+            </div>
+            <div class="event-details">
+              <h3>Séance with the Departed</h3>
+              <p>
+                Our resident medium attempts contact with the seventeen spirits
+                documented within these walls. Most sessions are uneventful.
+                Some are not.
+              </p>
+              <span class="event-time">9:00 PM — 11:00 PM</span>
+            </div>
+            <div class="event-cta">
+              <button class="event-button">Join</button>
+            </div>
           </div>
         </div>
 
-        <div class="event-card event-card-2" data-destructible>
-          <div class="event-date">
-            <span class="day">31</span>
-            <span class="month">Oct</span>
+        <div class="events-image">
+          <div class="events-image-item" data-destructible>
+            <img src="/assets/images/about/seance.webp" alt="Séance at Via Mortis" />
+            <div class="events-image-overlay"></div>
           </div>
-          <div class="event-details">
-            <h3>Halloween Hysteria</h3>
-            <p>
-              Our annual celebration of all things macabre. Costumes encouraged,
-              sanity optional.
-            </p>
-            <span class="event-time">6:00 PM - 3:00 AM</span>
-          </div>
-          <div class="event-cta">
-            <button class="event-button" data-graveyard-trigger>Reserve</button>
-          </div>
-        </div>
-
-        <div class="event-card event-card-3" data-destructible>
-          <div class="event-date">
-            <span class="day">02</span>
-            <span class="month">Nov</span>
-          </div>
-          <div class="event-details">
-            <h3>Séance with the Departed</h3>
-            <p>
-              Join our medium as she attempts to contact the spirits that still
-              roam our halls.
-            </p>
-            <span class="event-time">9:00 PM - 11:00 PM</span>
-          </div>
-          <div class="event-cta">
-            <button class="event-button" data-graveyard-trigger>Join</button>
+          <div class="events-image-item" data-destructible>
+            <img src="/assets/images/about/occult-calendar.webp" alt="Occult calendar" />
+            <div class="events-image-overlay"></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Louver 4 — After Events -->
+  <LouverStrip
+    image="/assets/images/parallax-strips/face-3.webp"
+    slitHeights={[120, 90, 160, 110, 140]}
+    gapHeights={[90, 100, 80, 95]}
+    parallaxDirection="diagonal-right"
+    className="louver-4"
+  />
+
   <!-- Contact/Footer Section -->
-  <section class="section contact-section">
-    <div class="container">
+  <section class="section contact-section" data-ghost-reveal>
+    <div class="container ghost-real-content">
       <div class="contact-content">
         <div class="contact-info">
-          <GlitchTransition trigger="hover" intensity="low" data-destructible>
-            <h3>Find Your Way to Damnation</h3>
-          </GlitchTransition>
+          <h2>Final Correspondence</h2>
 
           <div class="contact-details" data-destructible>
             <div class="detail-item">
-              <span class="detail-label">Address:</span>
-              <span class="detail-value">219 Nightmare Lane, Shadow Valley</span
+              <span class="detail-label">Address</span>
+              <span class="detail-value">2475 Glendower Ave., Los Angeles, CA</span
               >
             </div>
             <div class="detail-item">
-              <span class="detail-label">Phone:</span>
-              <span class="detail-value">(555) HAUNT-ME</span>
+              <span class="detail-label">Phone</span>
+              <span class="detail-value">(213) 590-VIAM</span>
             </div>
             <div class="detail-item">
-              <span class="detail-label">Hours:</span>
+              <span class="detail-label">Hours</span>
               <span class="detail-value">Dusk till Dawn, Every Night</span>
             </div>
           </div>
         </div>
 
         <div class="warning-notice" data-destructible>
-          <h4>⚠️ Warning</h4>
-          <p>
-            Via Mortis is not responsible for psychological trauma, existential
-            dread, or permanent changes to your perception of reality. Enter at
-            your own risk.
-          </p>
-          <div class="hero-cta">
-            <button class="cta-button" data-graveyard-trigger data-destruction-trigger data-destructible>Please take me</button>
+          <h4 class="warning-title">Warning</h4>
+          <GlitchTransition trigger="hover" intensity="medium">
+            <p>
+              Via Mortis is not responsible for psychological trauma, existential
+              dread, or permanent changes to your perception of reality. Enter at
+              your own risk.
+            </p>
+          </GlitchTransition>
+          <div class="destruction-cta">
+            <button
+              class="destruction-button"
+              data-graveyard-trigger
+              data-destruction-trigger
+              data-destructible>Please take me</button
+            >
           </div>
         </div>
       </div>
@@ -265,120 +372,85 @@ import PostCard from "../components/PostCard.astro";
 </BaseLayout>
 
 <style>
+  /* Section headings — IM Fell English throughout */
+  .tap-list h2,
+  .our-story h2,
+  .observations-section h2,
+  .events-section h2,
+  .contact-info h2 {
+    font-family: "IM Fell English", serif;
+    font-size: clamp(2rem, 6vw, 3rem);
+    color: #DCE6E2;
+    text-shadow: 0 0 20px rgba($cold-pale-fog, 0.1);
+    margin-left: 0.5rem;
+  }
+
   /* Hero Section */
   .hero {
     position: relative;
-    background: linear-gradient(
-      135deg,
-      #000 0%,
-      #490000 30%,
-      #000 70%,
-      #2a2a2a 100%
-    );
+    background:
+      radial-gradient(
+        ellipse 80% 60% at 50% 42%,
+        #1a2822 0%,
+        #0e1614 50%,
+        #070c0b 100%
+      );
     overflow: hidden;
-  }
-
-  .hero::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23490000" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-    z-index: 1;
-    pointer-events: none;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .hero-content {
     position: relative;
     z-index: 2;
     text-align: center;
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 4rem 2rem;
   }
 
   .hero-title-wrapper {
-    font-family: "Creepster", cursive;
-    font-size: clamp(6rem, 8vw, 8rem) !important;
+    font-family: "IM Fell English", serif;
+    font-size: clamp(4rem, 12vw, 10rem) !important;
   }
 
-  .hero-title-wrapper .hero-title h1 {
-    /* font-family: "Creepster", cursive !important; */
-    /* font-size: clamp(6rem, 20vw, 16rem) !important; */
-    /* margin-bottom: 1rem; */
-    /* font-weight: 400 !important; */
-    /* text-shadow:
-      0 0 20px #e90000,
-      0 0 40px #e90000,
-      0 0 60px #e90000,
-      0 0 80px #e90000; */
+  .hero-title-wrapper h1 {
+    font-family: "IM Fell English", serif;
+    font-size: clamp(4rem, 12vw, 10rem);
+    color: #98aeb8;
+    text-shadow: 0 0 60px rgba(152, 174, 184, 0.08);
+    letter-spacing: 0.04em;
+    margin-bottom: 1rem;
   }
 
   .hero-subtitle {
-    margin-bottom: 3rem;
+    margin-bottom: 0;
   }
+
 
   .hero-subtitle p {
-    font-size: clamp(1.2rem, 6vw, 5rem);
-    color: #bbff00;
-    font-style: italic;
-    text-shadow: 0 0 20px #bbff00;
+    font-size: clamp(2rem, 5vw, 2.6rem);
+    color: #4e5f6b;
+    /* font-style: italic; */
+    font-family: "IM Fell English", serif;
+    letter-spacing: 0.05em;
+    opacity: 1;
+    /* animation: subtitle-fade 1.5s ease-out 2s forwards; */
+    transition: all 1.8s ease-in-out;
   }
 
-  .hero-animation {
-    margin: 3rem 0;
+  .hero-subtitle:hover p {
+    color: #3e2f44;
+    opacity: 0.5;
+    /* text-shadow: 0 0 30px rgba(62, 47, 68, 0.3); */
   }
 
-  .hero-cta {
-    margin-top: 3rem;
-  }
-
-  .cta-button {
-    font-size: 1.2rem;
-    padding: 1rem 2rem;
-    background: linear-gradient(135deg, #490000 0%, #e90000 100%);
-    border: 2px solid #e90000;
-    color: #f8f8f8;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: 600;
-    border-radius: 0;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .cta-button::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.2),
-      transparent
-    );
-    transition: left 0.5s ease;
-  }
-
-  .cta-button:hover::before {
-    left: 100%;
-  }
-
-  .cta-button:hover {
-    background: linear-gradient(135deg, #e90000 0%, #bbff00 100%);
-    color: #000;
-    border-color: #bbff00;
-    transform: translateY(-3px);
-    box-shadow:
-      0 6px 20px rgba(233, 0, 0, 0.4),
-      0 0 40px rgba(187, 255, 0, 0.3);
+  @keyframes subtitle-fade {
+    to {
+      opacity: 0.7;
+    }
   }
 
   .hero-fog {
@@ -386,69 +458,87 @@ import PostCard from "../components/PostCard.astro";
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 200px;
+    height: 65vh;
     background: linear-gradient(
       to top,
-      rgba(42, 42, 42, 0.8) 0%,
-      rgba(42, 42, 42, 0.4) 50%,
-      transparent 100%
+      #0e1614       0%,
+      rgba(14, 22, 20, 0.98)  4%,
+      rgba(14, 22, 20, 0.94) 10%,
+      rgba(14, 22, 20, 0.86) 18%,
+      rgba(14, 22, 20, 0.72) 28%,
+      rgba(14, 22, 20, 0.53) 40%,
+      rgba(14, 22, 20, 0.33) 54%,
+      rgba(14, 22, 20, 0.16) 68%,
+      rgba(14, 22, 20, 0.05) 82%,
+      transparent           100%
     );
     z-index: 1;
     pointer-events: none;
   }
 
-  /* Attractions Grid */
+/* Attractions Grid */
   .attractions-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 6rem;
+    column-gap: 3rem;
+    margin-top: 4rem;
     padding: 0 1rem;
+    align-items: stretch;
+  }
+
+  /* Force full-height chain inside the grid. Astro scopes each component's
+     styles to its own hash, so cross-component targeting requires :global(). */
+  .attractions-grid :global(.post-card-link),
+  .attractions-grid :global(.post-card),
+  .attractions-grid :global(.displacement-wrapper) {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }
 
   /* Our Story Section */
   .our-story {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
-    padding: 6rem 1rem 6rem 0;
-    margin-top: 2rem;
+    background: linear-gradient(135deg, #0f1417 0%, #1a2326 50%, #0f1417 100%);
+    padding: 12rem 2rem;
+    margin-top: 0;
   }
 
   .story-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    gap: 8rem;
     align-items: center;
   }
 
   .story-text h2 {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
   }
 
   .story-paragraphs p {
     margin: 1.5rem 0 0 1rem;
     font-size: 1.1rem;
-    line-height: 1.8;
-    color: #f8f8f8;
+    line-height: 1.9;
+    color: #e2ded6;
   }
 
   .story-image {
     position: relative;
-    border-radius: 12px;
     overflow: hidden;
   }
 
   .story-image img {
     display: block;
     width: 100%;
-    height: 400px;
+    height: 500px;
     object-fit: cover;
-    filter: grayscale(30%) contrast(1.2);
-    transition: transform 0.5s ease;
+    filter: grayscale(60%) contrast(1.1);
+    transition: transform 0.5s ease, filter 0.4s ease;
   }
 
   .story-image:hover img {
-    transform: scale(1.05);
-    filter: grayscale(0%) contrast(1.4) hue-rotate(15deg);
+    transform: scale(1.03);
+    filter: grayscale(0%) contrast(1.2);
   }
 
   .story-image-overlay {
@@ -457,144 +547,129 @@ import PostCard from "../components/PostCard.astro";
     left: 0;
     right: 0;
     bottom: 0;
-    /* Blood Vignette - Red bleeds from edges */
     background: radial-gradient(
       ellipse at center,
-      rgba(0, 0, 0, 0.01) 0%,
-      rgba(50, 0, 0, 0.4) 40%,
-      rgba(25, 0, 0, 0.9) 100%
+      transparent 40%,
+      rgba(14, 22, 20, 0.6) 100%
     );
-    /* opacity: 0.8; */
-    transition: opacity 0.3s ease;
     pointer-events: none;
+    transition: background 0.8s ease;
   }
 
   .story-image:hover .story-image-overlay {
-    opacity: 0.9;
+    background: radial-gradient(
+      ellipse at center,
+      transparent 20%,
+      rgba(14, 22, 20, 0.5) 55%,
+      rgba(14, 22, 20, 0.85) 100%
+    );
   }
 
   /* Events Section */
   .events-section {
-    padding: 6rem 0;
+    padding: 10rem 0;
+  }
+
+  .events-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8rem;
+    align-items: stretch;
+    margin: 4rem 1rem;
   }
 
   .events-calendar {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* gap: 2rem; */
+  }
+
+  .events-image {
+    display: flex;
+    flex-direction: column;
     gap: 2rem;
-    margin: 3rem 1rem 0 1rem;
+  }
+
+  .events-image-item {
+    position: relative;
+    overflow: hidden;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .events-image-item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(60%) contrast(1.1);
+    transition: transform 0.5s ease, filter 0.4s ease;
+  }
+
+  .events-image-item:hover img {
+    transform: scale(1.03);
+    filter: grayscale(0%) contrast(1.2);
+  }
+
+  .events-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+      ellipse at center,
+      transparent 40%,
+      rgba(14, 22, 20, 0.6) 100%
+    );
+    pointer-events: none;
+    transition: background 0.8s ease;
+  }
+
+  .events-image-item:hover .events-image-overlay {
+    background: radial-gradient(
+      ellipse at center,
+      transparent 20%,
+      rgba(14, 22, 20, 0.5) 55%,
+      rgba(14, 22, 20, 0.85) 100%
+    );
   }
 
   .event-card {
-    background: rgba(26, 26, 26, 0.9);
-    border: 1px solid rgba(233, 0, 0, 0.3);
-    border-radius: 12px;
+    background: rgba(15, 20, 23, 0.6);
+    border: 1px solid rgba(70, 94, 99, 0.2);
     padding: 2rem;
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  /* Background image layer with ghostly filters - BOTTOM LAYER (z-index: 0) */
-  .event-card::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: 0;
-    transition: filter 0.3s ease;
-  }
-
-  /* Dark overlay for readability - MIDDLE LAYER (z-index: 1) */
-  .event-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 1;
-    transition: background 0.3s ease;
-  }
-
-  /* Ensure content stays above background - TOP LAYER (z-index: 2) */
-  .event-card > * {
-    position: relative;
-    z-index: 2;
-  }
-
-  /* Event Card 1 - tour-1.jpg - Ghostly Red Hue */
-  .event-card-1::after {
-    background-image: url('/tour-1.jpg');
-    filter: grayscale(50%) sepia(40%) hue-rotate(-10deg) opacity(0.85);
-  }
-
-  .event-card-1:hover::after {
-    filter: grayscale(20%) sepia(60%) hue-rotate(0deg) opacity(1) brightness(1.1);
-  }
-
-  /* Event Card 2 - tour-2.avif - Ghostly Green/Yellow Tint */
-  .event-card-2::after {
-    background-image: url('/tour-2.avif');
-    filter: grayscale(60%) sepia(30%) hue-rotate(40deg) opacity(0.8) contrast(1.1);
-  }
-
-  .event-card-2:hover::after {
-    filter: grayscale(15%) sepia(50%) hue-rotate(50deg) opacity(1) contrast(1.2) brightness(1.15);
-  }
-
-  /* Event Card 3 - tour-3.jpg - Ghostly Blue/Inverted Tint */
-  .event-card-3::after {
-    background-image: url('/tour-3.jpg');
-    filter: grayscale(70%) sepia(20%) invert(5%) opacity(0.75) contrast(1.2);
-  }
-
-  .event-card-3:hover::after {
-    filter: grayscale(25%) sepia(40%) invert(8%) opacity(1) contrast(1.3) brightness(1.1);
+    transition: border-color 0.3s ease;
   }
 
   .event-card:hover {
-    border-color: #bbff00;
-    transform: translateY(-5px);
-    box-shadow:
-      0 10px 30px rgba(233, 0, 0, 0.2),
-      0 0 50px rgba(187, 255, 0, 0.1);
-  }
-
-  .event-card:hover::before {
-    background: rgba(0, 0, 0, 0.5);
+    border-color: rgba(62, 47, 68, 0.5);
   }
 
   .event-date {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: linear-gradient(135deg, #490000, #e90000);
-    border-radius: 8px;
+    background: linear-gradient(135deg, #1a2326, #2a3c42);
     padding: 1rem;
     min-width: 60px;
+    flex-shrink: 0;
   }
 
   .event-date .day {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #f8f8f8;
+    color: #98aeb8;
     font-family: "Fira Code", monospace;
   }
 
   .event-date .month {
     font-size: 0.875rem;
-    color: #f8f8f8;
+    color: #98aeb8;
     text-transform: uppercase;
     font-weight: 500;
   }
@@ -604,7 +679,7 @@ import PostCard from "../components/PostCard.astro";
   }
 
   .event-details h3 {
-    color: #bbff00;
+    color: #98aeb8;
     margin-bottom: 0.5rem;
     font-size: 1.2rem;
   }
@@ -612,69 +687,53 @@ import PostCard from "../components/PostCard.astro";
   .event-details p {
     margin-bottom: 0.5rem;
     font-size: 0.9rem;
-    opacity: 0.9;
+    color: #dce6e2;
+    opacity: 0.8;
+    line-height: 1.6;
   }
 
   .event-time {
     font-size: 0.8rem;
-    color: #bbff00;
-    /* color: #4b4b01; */
+    color: #4e5f6b;
     font-family: "Fira Code", monospace;
   }
 
   .event-button {
+    width: 150px;
     padding: 0.75rem 1.5rem;
     font-size: 0.9rem;
     white-space: nowrap;
-
-    /* Gravestone style */
-    background: linear-gradient(135deg, #3a3a3a 0%, #4a4a4a 50%, #3a3a3a 100%);
-    border: 1px solid #2a2a2a;
-    color: #1a1a1a;
-    font-weight: 600;
+    font-family: "Pathway Gothic One", sans-serif;
+    font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-
-    /* Chiseled/engraved text effect */
+    cursor: inherit;
+    transition: all 0.3s ease-in-out;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #2a2e30 0%, #353a3c 50%, #2a2e30 100%);
+    border: 1px solid #465e63;
+    color: #4e5f6b;
     text-shadow:
-      0 1px 1px rgba(255, 255, 255, 0.15),
-      0 -1px 1px rgba(0, 0, 0, 0.6);
-
-    /* Stone depth effect */
+      0 1px 1px rgba(220, 230, 226, 0.08),
+      0 -1px 1px rgba(0, 0, 0, 0.5);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.1),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(220, 230, 226, 0.05),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.4),
       0 2px 4px rgba(0, 0, 0, 0.3);
   }
 
   .event-button:hover {
-    /* Brighter moonlit stone */
-    background: linear-gradient(135deg, #4a4a4a 0%, #5a5a5a 50%, #4a4a4a 100%);
-    color: #2a2a2a;
-    border-color: #bbff00;
-
-    /* Enhanced engraving on hover */
-    text-shadow:
-      0 1px 2px rgba(255, 255, 255, 0.2),
-      0 -1px 2px rgba(0, 0, 0, 0.7);
-
-    /* Ghostly glow */
+    border-color: #3e2f44;
+    color: #98aeb8;
+    background: linear-gradient(135deg, #2a2e30 0%, #353a3c 50%, #2a2e30 100%);
+    transform: none;
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.15),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.6),
-      0 2px 6px rgba(0, 0, 0, 0.4),
-      0 0 15px rgba(187, 255, 0, 0.3),
-      0 0 30px rgba(187, 255, 0, 0.15);
-
-    /* Slight lift like stone rising */
-    transform: translateY(-2px);
+      inset 0 1px 0 rgba(220, 230, 226, 0.08),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.4),
+      0 0 15px rgba(62, 47, 68, 0.2);
   }
 
   .event-button:active {
-    /* Pressed into stone */
     transform: translateY(0);
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.05),
@@ -684,8 +743,8 @@ import PostCard from "../components/PostCard.astro";
 
   /* Contact Section */
   .contact-section {
-    background: linear-gradient(135deg, #1a1a1a 0%, #000 50%, #1a1a1a 100%);
-    padding: 6rem 1rem 6rem 0;
+    background: linear-gradient(135deg, #0f1417 0%, #0e1614 50%, #0f1417 100%);
+    padding: 10rem 2rem;
   }
 
   .contact-content {
@@ -697,7 +756,7 @@ import PostCard from "../components/PostCard.astro";
 
   .contact-info h3 {
     margin-bottom: 2rem;
-    color: #e90000;
+    color: #98aeb8;
   }
 
   .contact-details {
@@ -714,243 +773,63 @@ import PostCard from "../components/PostCard.astro";
   }
 
   .detail-label {
-    font-size: 0.9rem;
-    color: #bbff00;
-    font-weight: 500;
+    font-size: 1rem;
+    color: #465e63;
+    font-family: "Pathway Gothic One", sans-serif;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.15em;
   }
 
   .detail-value {
     font-size: 1.1rem;
-    color: #f8f8f8;
+    color: #dce6e2;
     font-family: "Fira Code", monospace;
   }
 
   .warning-notice {
-    background: rgba(233, 0, 0, 0.1);
-    border: 1px solid rgba(233, 0, 0, 0.3);
-    border-radius: 8px;
+    background: rgba(15, 20, 23, 0.4);
+    border: 1px solid rgba(78, 95, 107, 0.2);
     padding: 2rem;
   }
 
-  .warning-notice h4 {
-    color: #e90000;
+  .warning-title {
+    font-family: "Pathway Gothic One", sans-serif;
+    font-size: 1.5rem;
+    color: #4e5f6b;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
     margin-bottom: 1rem;
-    font-size: 1.2rem;
   }
 
   .warning-notice p {
-    font-size: 0.95rem;
+    font-size: 1rem;
     line-height: 1.6;
-    color: #f8f8f8;
-    opacity: 0.9;
+    color: #dce6e2;
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
   }
 
-  /* Blood Drip Stream 0 Width Override - EXPERIMENTAL */
-  /* Stream 0 (left stream at 20%) - Make it wider */
-  .hero-blood-effect :global([data-stream="0"]) {
-    width: 24px !important; /* Double the container width */
+  .destruction-cta {
+    margin-top: 1.5rem;
   }
 
-  .hero-blood-effect :global([data-stream="0"] .drip-stream) {
-    width: 8px !important; /* Start wider (default is 2px) */
-    animation-name: stream-grow-wide;
+  .destruction-button {
+    background: transparent;
+    border: 1px solid rgba(90, 46, 46, 0.3);
+    color: rgba(90, 46, 46, 0.6);
+    font-family: "IM Fell English", serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    letter-spacing: 0.1em;
+    padding: 0.75rem 1.5rem;
+    cursor: inherit;
+    transition: all 0.4s ease;
   }
 
-  /* Custom wider animation for Stream 0 */
-  @keyframes stream-grow-wide {
-    0% {
-      height: 0;
-      opacity: 0;
-      width: 10px;
-      clip-path: polygon(45% 0%, 55% 0%, 100% 100%, 0% 100%);
-    }
-    20% {
-      height: 15vh;
-      opacity: 0.4;
-      width: 11px;
-      clip-path: polygon(42% 0%, 58% 0%, 100% 100%, 0% 100%);
-    }
-    40% {
-      height: 35vh;
-      opacity: 0.6;
-      width: 12px;
-      clip-path: polygon(40% 0%, 60% 0%, 95% 100%, 5% 100%);
-    }
-    60% {
-      height: 55vh;
-      opacity: 0.75;
-      width: 13px;
-      clip-path: polygon(38% 0%, 62% 0%, 90% 100%, 10% 100%);
-    }
-    80% {
-      height: 75vh;
-      opacity: 0.85;
-      width: 14px;
-      clip-path: polygon(35% 0%, 65% 0%, 85% 100%, 15% 100%);
-    }
-    100% {
-      height: 90vh;
-      opacity: 0.9;
-      width: 16px;
-      clip-path: polygon(30% 0%, 70% 0%, 80% 100%, 20% 100%);
-    }
-  }
-
-  /* Destruction Animations - Fall Effects */
-  @keyframes fall-straight {
-    0% {
-      transform: translateY(0) rotate(0deg);
-      opacity: 1;
-    }
-    10% {
-      transform: translateY(50px) rotate(2deg);
-      opacity: 1;
-    }
-    30% {
-      transform: translateY(200px) rotate(-3deg);
-      opacity: 0.9;
-    }
-    50% {
-      transform: translateY(500px) rotate(4deg);
-      opacity: 0.7;
-    }
-    70% {
-      transform: translateY(900px) rotate(-2deg);
-      opacity: 0.5;
-    }
-    100% {
-      transform: translateY(1500px) rotate(5deg);
-      opacity: 0;
-    }
-  }
-
-  @keyframes fall-hinge-left {
-    0% {
-      transform-origin: top left;
-      transform: rotate(0deg);
-      opacity: 1;
-    }
-    15% {
-      transform: rotate(15deg);
-      opacity: 1;
-    }
-    30% {
-      transform: rotate(-10deg);
-      opacity: 1;
-    }
-    45% {
-      transform: rotate(20deg);
-      opacity: 1;
-    }
-    60% {
-      transform: rotate(-5deg) translateY(300px);
-      opacity: 0.9;
-    }
-    80% {
-      transform: rotate(25deg) translateY(800px);
-      opacity: 0.5;
-    }
-    100% {
-      transform: rotate(45deg) translateY(1500px) translateX(-200px);
-      opacity: 0;
-    }
-  }
-
-  @keyframes fall-hinge-right {
-    0% {
-      transform-origin: top right;
-      transform: rotate(0deg);
-      opacity: 1;
-    }
-    15% {
-      transform: rotate(-15deg);
-      opacity: 1;
-    }
-    30% {
-      transform: rotate(10deg);
-      opacity: 1;
-    }
-    45% {
-      transform: rotate(-20deg);
-      opacity: 1;
-    }
-    60% {
-      transform: rotate(5deg) translateY(300px);
-      opacity: 0.9;
-    }
-    80% {
-      transform: rotate(-25deg) translateY(800px);
-      opacity: 0.5;
-    }
-    100% {
-      transform: rotate(-45deg) translateY(1500px) translateX(200px);
-      opacity: 0;
-    }
-  }
-
-  /* Destruction animation classes */
-  .destructible-falling {
-    position: fixed !important;
-    z-index: 10000 !important;
-    will-change: transform, opacity;
-    pointer-events: none;
-  }
-
-  .fall-straight-active {
-    animation: fall-straight 2s ease-in forwards;
-  }
-
-  .fall-hinge-left-active {
-    animation: fall-hinge-left 2s ease-in forwards;
-  }
-
-  .fall-hinge-right-active {
-    animation: fall-hinge-right 2s ease-in forwards;
-  }
-  
-    .body-fading {
-      animation: body-fade-out 10000ms ease-in forwards;
-    }
-
-  /* Body fade out animation */
-  @keyframes body-fade-out {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
-  }
-
-  /* Button charging effect */
-  @keyframes button-charge {
-    0% {
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.1),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.5),
-        0 2px 4px rgba(0, 0, 0, 0.3);
-    }
-    50% {
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.2),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.6),
-        0 0 20px rgba(233, 0, 0, 0.8),
-        0 0 40px rgba(233, 0, 0, 0.6),
-        0 0 60px rgba(233, 0, 0, 0.4);
-      transform: scale(1.05);
-    }
-    100% {
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.1),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.5),
-        0 2px 4px rgba(0, 0, 0, 0.3);
-    }
-  }
-
-  .button-charging {
-    animation: button-charge 500ms ease-in-out;
+  .destruction-button:hover {
+    border-color: #5a2e2e;
+    color: #5a2e2e;
+    box-shadow: 0 0 30px rgba(90, 46, 46, 0.15);
   }
 
   /* Responsive Design */
@@ -960,7 +839,11 @@ import PostCard from "../components/PostCard.astro";
     }
 
     .hero-title-wrapper {
-    font-size: clamp(3rem, 4vw, 4rem) !important;
+      font-size: clamp(3rem, 4vw, 4rem) !important;
+    }
+
+    .hero-subtitle p {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
   }
 
     .attractions-grid {
@@ -971,11 +854,33 @@ import PostCard from "../components/PostCard.astro";
     .story-content,
     .contact-content {
       grid-template-columns: 1fr;
-      gap: 2rem;
+      gap: 3rem;
+    }
+
+    .story-image img {
+      height: 260px;
+    }
+
+    .story-paragraphs p {
+    font-size: .9rem;
+
+  }
+
+    .obs-image img {
+      height: 220px;
+    }
+
+    .events-layout {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .events-image {
+      display: none;
     }
 
     .events-calendar {
-      grid-template-columns: 1fr;
+      margin: 0;
     }
 
     .event-card {
@@ -983,96 +888,27 @@ import PostCard from "../components/PostCard.astro";
       text-align: center;
     }
   }
+  .louver-1 {
+    /* filter: grayscale(.3) blur(3px) contrast(1.2) brightness(0.7); */
+  }
+  .louver-2 {
+    filter: grayscale(.8) blur(1px) contrast(1);
+  }
+  .louver-3 {
+    filter: grayscale(.1) blur(1px) contrast(1);
+  }
+  .louver-4 {
+    filter: grayscale(.3) blur(3px) contrast(1.2) brightness(0.7);
+  }
+  .louver-5 {
+    filter: grayscale(.4) contrast(1.2) brightness(1.2);
+  }
 </style>
 
 <script>
-  class SiteDestruction {
-    private isDestroying: boolean = false;
-    private fallTypes = ['fall-straight', 'fall-hinge-left', 'fall-hinge-right'];
-
-    init() {
-      // Listen for destruction trigger button
-      document.addEventListener('click', (e) => {
-        const target = e.target as HTMLElement;
-        const trigger = target.closest('[data-destruction-trigger]');
-
-        if (trigger && !this.isDestroying) {
-          e.preventDefault();
-          e.stopPropagation();
-          this.triggerDestruction(trigger as HTMLElement);
-        }
-      });
+  document.addEventListener('click', (e) => {
+    if ((e.target as Element).closest('.event-button')) {
+      window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
     }
-
-    triggerDestruction(button: HTMLElement) {
-      this.isDestroying = true;
-
-      // Phase 1: Button charging effect (500ms)
-      button.classList.add('button-charging');
-
-      setTimeout(() => {
-        button.classList.remove('button-charging');
-
-        // Phase 2: Start destruction sequence
-        this.destroyElements();
-
-        // Phase 3: Hard reload after 10 seconds
-        setTimeout(() => {
-          window.location.reload();
-        }, 10000);
-      }, 500);
-    }
-
-    destroyElements() {
-      // Start body fade out animation
-      document.body.classList.add('body-fading');
-
-      // Get all destructible elements
-      const elements = document.querySelectorAll<HTMLElement>('[data-destructible]');
-      const elementsArray = Array.from(elements);
-
-      elementsArray.forEach((element) => {
-        // Random fall type (33% each)
-        const randomFallType = this.fallTypes[Math.floor(Math.random() * this.fallTypes.length)];
-
-        // Random start delay between 0-8000ms
-        const randomDelay = Math.random() * 8000;
-
-        setTimeout(() => {
-          this.makeElementFall(element, randomFallType);
-        }, randomDelay);
-      });
-    }
-
-    makeElementFall(element: HTMLElement, fallType: string) {
-      // Get current position before making it fixed
-      const rect = element.getBoundingClientRect();
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-
-      // Apply fixed positioning with current location
-      element.classList.add('destructible-falling');
-      element.style.top = `${rect.top + scrollTop}px`;
-      element.style.left = `${rect.left + scrollLeft}px`;
-      element.style.width = `${rect.width}px`;
-      element.style.height = `${rect.height}px`;
-
-      // Small delay to ensure styles are applied
-      requestAnimationFrame(() => {
-        element.classList.add(`${fallType}-active`);
-      });
-    }
-  }
-
-  // Initialize on page load
-  document.addEventListener('DOMContentLoaded', () => {
-    const destruction = new SiteDestruction();
-    destruction.init();
-  });
-
-  // Re-initialize on Astro page transitions
-  document.addEventListener('astro:page-load', () => {
-    const destruction = new SiteDestruction();
-    destruction.init();
   });
 </script>

@@ -1,309 +1,289 @@
 ---
 export interface Props {
   intensity?: 'low' | 'medium' | 'high';
-  duration?: number;
   trigger?: 'hover' | 'scroll' | 'auto';
   className?: string;
 }
 
 const {
   intensity = 'medium',
-  duration = 300,
   trigger = 'auto',
   className = '',
   ...rest
 } = Astro.props;
-
-const intensityMap = {
-  low: 4,
-  medium: 8,
-  high: 16
-};
-
-const glitchIntensity = intensityMap[intensity];
 ---
 
-<div class={`glitch-container ${className}`} data-trigger={trigger} data-duration={duration} {...rest}>
+<div
+  class={`melt-container ${className}`}
+  data-melt-trigger={trigger}
+  data-melt-intensity={intensity}
+  {...rest}
+>
   <slot />
 </div>
 
-<style define:vars={{ glitchIntensity: `${glitchIntensity}px`, duration: `${duration}ms` }}>
-  .glitch-container {
+<style lang="scss">
+  @import '../styles/variables';
+
+  .melt-container {
     position: relative;
-    display: inline-block;
-    overflow: hidden;
-    color: #bbff00;
-    font-size: clamp(1.2rem, 2vw, 3rem);
-    font-family: Impact, Haettenschweiler, sans-serif;
-    transform: scaleY(2);
-    padding: 0 1rem;
+    display: block;
+    transition: filter 0.6s ease-in-out, transform 0.6s ease-in-out;
   }
 
-  .glitch-container h2 {
-  color: $secondary-scream;
-
-  text-shadow:
-    0 0 8px $secondary-scream,
-    0 0 16px $secondary-scream;
-}
-
-  .glitch-container.active {
-    animation: sophisticated-glitch var(--duration) ease-in-out;
+  .melt-container :global(h2),
+  .melt-container :global(h3) {
+    font-family: $font-display;
+    color: $cold-pale-fog;
+    text-shadow:
+      0 0 8px rgba($wrong-bruised-purple, 0.3),
+      0 0 16px rgba($cold-pale-fog, 0.15);
   }
 
-  .glitch-container.active::before,
-  .glitch-container.active::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: inherit;
-    z-index: 2;
-    mix-blend-mode: multiply;
-  }
-
-  .glitch-container.active::before {
-    animation: glitch-red var(--duration) ease-in-out;
-    background: #e90000;
-    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
-  }
-
-  .glitch-container.active::after {
-    animation: glitch-green var(--duration) ease-in-out;
-    background: #bbff00;
-    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
-  }
-
-  @keyframes sophisticated-glitch {
-    0% {
-      transform: translateX(0);
-      filter: hue-rotate(0deg) contrast(1) brightness(1);
-    }
-    10% {
-      transform: translateX(calc(var(--glitchIntensity) * -1));
-      filter: hue-rotate(90deg) contrast(1.5) brightness(0.8);
-    }
-    20% {
-      transform: translateX(var(--glitchIntensity));
-      filter: hue-rotate(180deg) contrast(0.8) brightness(1.2);
-    }
-    30% {
-      transform: translateX(calc(var(--glitchIntensity) * -0.5));
-      filter: hue-rotate(270deg) contrast(1.2) brightness(0.9);
-    }
-    40% {
-      transform: translateX(calc(var(--glitchIntensity) * 0.3));
-      filter: hue-rotate(360deg) contrast(0.6) brightness(1.3);
-    }
-    50% {
-      transform: translateX(calc(var(--glitchIntensity) * -0.8));
-      filter: hue-rotate(45deg) contrast(1.8) brightness(0.7);
-    }
-    60% {
-      transform: translateX(calc(var(--glitchIntensity) * 0.6));
-      filter: hue-rotate(135deg) contrast(1.1) brightness(1.1);
-    }
-    70% {
-      transform: translateX(calc(var(--glitchIntensity) * -0.2));
-      filter: hue-rotate(225deg) contrast(0.9) brightness(0.95);
-    }
-    80% {
-      transform: translateX(calc(var(--glitchIntensity) * 0.4));
-      filter: hue-rotate(315deg) contrast(1.3) brightness(1.05);
-    }
-    90% {
-      transform: translateX(calc(var(--glitchIntensity) * -0.1));
-      filter: hue-rotate(180deg) contrast(1.1) brightness(0.9);
-    }
-    100% {
-      transform: translateX(0);
-      filter: hue-rotate(0deg) contrast(1) brightness(1);
-    }
-  }
-
-  @keyframes glitch-red {
-    0% {
-      transform: translateX(0) scaleX(1);
-      opacity: 0.8;
-    }
-    15% {
-      transform: translateX(calc(var(--glitchIntensity) * 0.5)) scaleX(0.95);
-      opacity: 0.9;
-    }
-    30% {
-      transform: translateX(calc(var(--glitchIntensity) * -0.3)) scaleX(1.05);
-      opacity: 0.7;
-    }
-    45% {
-      transform: translateX(calc(var(--glitchIntensity) * 0.2)) scaleX(0.98);
-      opacity: 0.85;
-    }
-    60% {
-      transform: translateX(calc(var(--glitchIntensity) * -0.4)) scaleX(1.02);
-      opacity: 0.75;
-    }
-    75% {
-      transform: translateX(calc(var(--glitchIntensity) * 0.1)) scaleX(0.99);
-      opacity: 0.8;
-    }
-    90% {
-      transform: translateX(calc(var(--glitchIntensity) * -0.1)) scaleX(1.01);
-      opacity: 0.85;
-    }
-    100% {
-      transform: translateX(0) scaleX(1);
-      opacity: 0.8;
-    }
-  }
-
-  @keyframes glitch-green {
-    0% {
-      transform: translateX(0) scaleX(1);
-      opacity: 0.6;
-    }
-    20% {
-      transform: translateX(calc(var(--glitchIntensity) * -0.4)) scaleX(1.03);
-      opacity: 0.8;
-    }
-    35% {
-      transform: translateX(calc(var(--glitchIntensity) * 0.6)) scaleX(0.97);
-      opacity: 0.5;
-    }
-    50% {
-      transform: translateX(calc(var(--glitchIntensity) * -0.2)) scaleX(1.01);
-      opacity: 0.75;
-    }
-    65% {
-      transform: translateX(calc(var(--glitchIntensity) * 0.3)) scaleX(0.99);
-      opacity: 0.65;
-    }
-    80% {
-      transform: translateX(calc(var(--glitchIntensity) * -0.1)) scaleX(1.02);
-      opacity: 0.7;
-    }
-    95% {
-      transform: translateX(calc(var(--glitchIntensity) * 0.05)) scaleX(0.995);
-      opacity: 0.6;
-    }
-    100% {
-      transform: translateX(0) scaleX(1);
-      opacity: 0.6;
-    }
-  }
-
-  /* Hover trigger */
-  .glitch-container[data-trigger="hover"]:hover {
-    animation: sophisticated-glitch var(--duration) ease-in-out;
-  }
-
-  .glitch-container[data-trigger="hover"]:hover::before,
-  .glitch-container[data-trigger="hover"]:hover::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: inherit;
-    z-index: 2;
-    mix-blend-mode: multiply;
-  }
-
-  .glitch-container[data-trigger="hover"]:hover::before {
-    animation: glitch-red var(--duration) ease-in-out;
-    background: #e90000;
-    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
-  }
-
-  .glitch-container[data-trigger="hover"]:hover::after {
-    animation: glitch-green var(--duration) ease-in-out;
-    background: #bbff00;
-    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
-  }
-
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .glitch-container {
-      --glitchIntensity: calc(var(--glitchIntensity) * 0.5);
-    }
+  .melt-container :global(p) {
+    font-family: $font-display;
   }
 </style>
 
 <script>
-  class GlitchTransition {
-    constructor(element: HTMLElement) {
-      this.element = element;
-      this.trigger = element.dataset.trigger || 'auto';
-      this.duration = parseInt(element.dataset.duration || '300');
-      this.init();
+  // ── Shared SVG filter (injected once) ──────────────────────────────────────
+
+  const FILTER_ID = 'melt-displacement';
+
+  function ensureMeltFilter(): SVGFEDisplacementMapElement | null {
+    if (document.getElementById(FILTER_ID)) {
+      return document.querySelector(`#${FILTER_ID} feDisplacementMap`);
     }
 
-    private element: HTMLElement;
-    private trigger: string;
-    private duration: number;
+    const ns = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(ns, 'svg');
+    svg.setAttribute('width', '0');
+    svg.setAttribute('height', '0');
+    svg.style.position = 'absolute';
+    svg.style.pointerEvents = 'none';
 
-    init() {
-      if (this.trigger === 'scroll') {
-        this.setupScrollTrigger();
-      } else if (this.trigger === 'auto') {
-        this.setupAutoTrigger();
+    const filter = document.createElementNS(ns, 'filter');
+    filter.setAttribute('id', FILTER_ID);
+    filter.setAttribute('x', '-10%');
+    filter.setAttribute('y', '-10%');
+    filter.setAttribute('width', '120%');
+    filter.setAttribute('height', '120%');
+
+    const turbulence = document.createElementNS(ns, 'feTurbulence');
+    turbulence.setAttribute('type', 'turbulence');
+    turbulence.setAttribute('baseFrequency', '0.015 0.025');
+    turbulence.setAttribute('numOctaves', '3');
+    turbulence.setAttribute('seed', '4');
+    turbulence.setAttribute('result', 'warp');
+
+    const displacement = document.createElementNS(ns, 'feDisplacementMap');
+    displacement.setAttribute('in', 'SourceGraphic');
+    displacement.setAttribute('in2', 'warp');
+    displacement.setAttribute('scale', '0');
+    displacement.setAttribute('xChannelSelector', 'R');
+    displacement.setAttribute('yChannelSelector', 'G');
+
+    filter.appendChild(turbulence);
+    filter.appendChild(displacement);
+    svg.appendChild(filter);
+    document.body.appendChild(svg);
+
+    return displacement;
+  }
+
+  // ── Per-instance animation ─────────────────────────────────────────────────
+
+  const INTENSITY_SCALE = { low: 8, medium: 15, high: 25 };
+  const MELT_IN_DURATION = 600;
+  const MELT_OUT_DURATION = 600;
+
+  const activeAnimations = new WeakMap<HTMLElement, number>();
+  let activeMeltCount = 0;
+  let sharedDisplacement: SVGFEDisplacementMapElement | null = null;
+
+  function getOrCreateFilter(el: HTMLElement): {
+    filterId: string;
+    displacement: SVGFEDisplacementMapElement;
+  } {
+    const existing = el.dataset.meltFilterId;
+    if (existing) {
+      const disp = document.querySelector(
+        `#${existing} feDisplacementMap`
+      ) as SVGFEDisplacementMapElement | null;
+      if (disp) return { filterId: existing, displacement: disp };
+    }
+
+    if (activeMeltCount === 0 && sharedDisplacement) {
+      el.dataset.meltFilterId = FILTER_ID;
+      return { filterId: FILTER_ID, displacement: sharedDisplacement };
+    }
+
+    // Clone the filter for concurrent use
+    const id = `${FILTER_ID}-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+    const originalFilter = document.getElementById(FILTER_ID);
+    if (!originalFilter) {
+      return { filterId: FILTER_ID, displacement: sharedDisplacement! };
+    }
+
+    const svg = originalFilter.closest('svg')!;
+    const clone = originalFilter.cloneNode(true) as SVGFilterElement;
+    clone.setAttribute('id', id);
+    svg.appendChild(clone);
+
+    const disp = clone.querySelector('feDisplacementMap') as SVGFEDisplacementMapElement;
+    el.dataset.meltFilterId = id;
+    return { filterId: id, displacement: disp };
+  }
+
+  function cleanupFilter(el: HTMLElement): void {
+    const id = el.dataset.meltFilterId;
+    if (id && id !== FILTER_ID) {
+      document.getElementById(id)?.remove();
+    }
+    delete el.dataset.meltFilterId;
+  }
+
+  function animateScale(
+    displacement: SVGFEDisplacementMapElement,
+    from: number,
+    to: number,
+    duration: number,
+    onDone?: () => void
+  ): number {
+    const start = performance.now();
+
+    function tick(now: number) {
+      const elapsed = now - start;
+      const t = Math.min(elapsed / duration, 1);
+      const eased = t < 0.5
+        ? 4 * t * t * t
+        : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+      const current = from + (to - from) * eased;
+      displacement.setAttribute('scale', String(current));
+
+      if (t < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        onDone?.();
       }
     }
 
-    private setupScrollTrigger() {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              this.triggerGlitch();
-            }
-          });
-        },
-        { threshold: 0.1 }
-      );
-
-      observer.observe(this.element);
-    }
-
-    private setupAutoTrigger() {
-      // Random glitch every 8-15 seconds
-      const randomInterval = () => {
-        const interval = Math.random() * 7000 + 8000;
-        setTimeout(() => {
-          if (Math.random() > 0.3) {
-            this.triggerGlitch();
-          }
-          randomInterval();
-        }, interval);
-      };
-
-      randomInterval();
-    }
-
-    private triggerGlitch() {
-      this.element.classList.add('active');
-      
-      setTimeout(() => {
-        this.element.classList.remove('active');
-      }, this.duration);
-    }
+    return requestAnimationFrame(tick);
   }
 
-  // Initialize all glitch containers
-  document.addEventListener('DOMContentLoaded', () => {
-    const glitchContainers = document.querySelectorAll<HTMLElement>('.glitch-container');
-    glitchContainers.forEach(container => {
-      new GlitchTransition(container);
-    });
-  });
+  function meltIn(el: HTMLElement): void {
+    const prev = activeAnimations.get(el);
+    if (prev) cancelAnimationFrame(prev);
 
-  // Re-initialize on page transitions
-  document.addEventListener('astro:page-load', () => {
-    const glitchContainers = document.querySelectorAll<HTMLElement>('.glitch-container');
-    glitchContainers.forEach(container => {
-      new GlitchTransition(container);
+    const intensity = el.dataset.meltIntensity as keyof typeof INTENSITY_SCALE || 'medium';
+    const peak = INTENSITY_SCALE[intensity] || INTENSITY_SCALE.medium;
+
+    const { filterId, displacement } = getOrCreateFilter(el);
+    activeMeltCount++;
+
+    el.style.filter = `url(#${filterId}) brightness(0.93) blur(0.6px)`;
+    el.style.transform = 'translateY(1.5px)';
+
+    const currentScale = parseFloat(displacement.getAttribute('scale') || '0');
+    const frameId = animateScale(displacement, currentScale, peak, MELT_IN_DURATION);
+    activeAnimations.set(el, frameId);
+  }
+
+  function meltOut(el: HTMLElement): void {
+    const prev = activeAnimations.get(el);
+    if (prev) cancelAnimationFrame(prev);
+
+    const filterId = el.dataset.meltFilterId;
+    if (!filterId) return;
+    const displacement = document.querySelector(
+      `#${filterId} feDisplacementMap`
+    ) as SVGFEDisplacementMapElement | null;
+    if (!displacement) return;
+
+    const currentScale = parseFloat(displacement.getAttribute('scale') || '0');
+
+    // Keep the SVG filter applied during the out-animation so displacement
+    // visibly eases back to 0. CSS filter transitions brightness/blur back
+    // via the 0.8s transition on the element.
+    el.style.filter = `url(#${filterId})`;
+    el.style.transform = '';
+
+    const frameId = animateScale(displacement, currentScale, 0, MELT_OUT_DURATION, () => {
+      // Only now remove the filter entirely
+      el.style.filter = '';
+      activeMeltCount = Math.max(0, activeMeltCount - 1);
+      cleanupFilter(el);
+      activeAnimations.delete(el);
     });
-  });
+    activeAnimations.set(el, frameId);
+  }
+
+  function meltOnce(el: HTMLElement): void {
+    const prev = activeAnimations.get(el);
+    if (prev) cancelAnimationFrame(prev);
+
+    const intensity = el.dataset.meltIntensity as keyof typeof INTENSITY_SCALE || 'medium';
+    const peak = INTENSITY_SCALE[intensity] || INTENSITY_SCALE.medium;
+
+    const { filterId, displacement } = getOrCreateFilter(el);
+    activeMeltCount++;
+
+    el.style.filter = `url(#${filterId}) brightness(0.93) blur(0.4px)`;
+    el.style.transform = 'translateY(1.5px)';
+
+    const frameId = animateScale(displacement, 0, peak, MELT_IN_DURATION, () => {
+      // Hold briefly at peak, then melt back out
+      setTimeout(() => {
+        // Keep filter URL during out-animation
+        el.style.filter = `url(#${filterId})`;
+        el.style.transform = '';
+
+        animateScale(displacement, peak, 0, MELT_OUT_DURATION, () => {
+          el.style.filter = '';
+          activeMeltCount = Math.max(0, activeMeltCount - 1);
+          cleanupFilter(el);
+          activeAnimations.delete(el);
+        });
+      }, 200);
+    });
+    activeAnimations.set(el, frameId);
+  }
+
+  // ── Setup ──────────────────────────────────────────────────────────────────
+
+  function initMeltContainers(): void {
+    sharedDisplacement = ensureMeltFilter();
+
+    document.querySelectorAll<HTMLElement>('.melt-container').forEach(container => {
+      if (container.closest('[data-ghost-clone]')) return;
+      if (container.dataset.meltInit) return;
+      container.dataset.meltInit = 'true';
+
+      const trigger = container.dataset.meltTrigger || 'auto';
+
+      if (trigger === 'hover') {
+        container.addEventListener('mouseenter', () => meltIn(container));
+        container.addEventListener('mouseleave', () => meltOut(container));
+      } else if (trigger === 'scroll') {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                meltOnce(container);
+                observer.disconnect();
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+        observer.observe(container);
+      } else if (trigger === 'auto') {
+        setTimeout(() => meltOnce(container), 400);
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initMeltContainers);
+  document.addEventListener('astro:page-load', initMeltContainers);
 </script>

@@ -24,54 +24,53 @@ const {
 } = Astro.props;
 ---
 
-<article class={`post-card ${className}`} {...rest}>
-  <DisplacementMap intensity={10} frequency={0.015} className="card-wrapper">
-    <div class="card-inner">
-      {image && (
-        <div class="card-image">
-          <img src={image} alt={title} loading="lazy" />
-          <div class="image-overlay"></div>
-        </div>
-      )}
-      
-      <div class="card-content">
-        <div class="card-meta">
-          <span class="category">{category}</span>
-          {date && <span class="date">{date}</span>}
-        </div>
-        
-        <GlitchTransition trigger="hover" intensity="medium" className="title-wrapper">
-          <h3 class="card-title">
-            <a href={href}>{title}</a>
-          </h3>
-        </GlitchTransition>
-        
-        <p class="card-description">{description}</p>
-        
-        <div class="card-footer">
-          <button class="read-more" data-graveyard-trigger>
-            Enter If You Dare
-            <span class="arrow">→</span>
-          </button>
+<a href={href} class={`post-card-link ${className}`} {...rest}>
+  <article class="post-card" data-ghost-reveal>
+    <DisplacementMap intensity={5} frequency={0.015} className="card-wrapper">
+      <div class="card-inner">
+        {image && (
+          <div class="card-image">
+            <img src={image} alt={title} loading="lazy" />
+            <div class="image-overlay"></div>
+          </div>
+        )}
+
+        <div class="card-content">
+          <div class="card-meta">
+            <span class="category">{category}</span>
+            {date && <span class="date">{date}</span>}
+          </div>
+
+          <h3 class="card-title">{title}</h3>
+
+          <p class="card-description">{description}</p>
         </div>
       </div>
-      
-      <!-- Liquid fill effect -->
-      <div class="liquid-fill"></div>
-    </div>
-  </DisplacementMap>
-</article>
+    </DisplacementMap>
+  </article>
+</a>
 
-<style>
+<style lang="scss">
+  @import '../styles/variables';
+
+  .post-card-link {
+    display: block;
+    height: 100%;
+    text-decoration: none;
+    cursor: inherit;
+  }
+
   .post-card {
     position: relative;
     height: 100%;
-    transition: transform 0.3s ease;
+    transition: transform 0.5s ease-in-out;
+    cursor: inherit;
   }
 
   .card-wrapper {
     height: 100%;
     display: block;
+    cursor: inherit;
   }
 
   .card-inner {
@@ -79,17 +78,17 @@ const {
     height: 100%;
     background: linear-gradient(
       135deg,
-      rgba(26, 26, 26, 0.9) 0%,
-      rgba(42, 42, 42, 0.8) 50%,
-      rgba(26, 26, 26, 0.9) 100%
+      rgba($void-elevated, 0.9) 0%,
+      rgba($void-deep-field, 0.8) 50%,
+      rgba($void-elevated, 0.9) 100%
     );
-    border: 1px solid rgba(73, 0, 0, 0.3);
-    border-radius: 12px;
+    border: 1px solid rgba($cold-decayed, 0.2);
     overflow: hidden;
     backdrop-filter: blur(10px);
     display: flex;
     flex-direction: column;
-    transition: all 0.3s ease;
+    transition: all 0.5s ease;
+    cursor: inherit;
   }
 
   .card-inner::before {
@@ -101,13 +100,18 @@ const {
     bottom: 0;
     background: linear-gradient(
       135deg,
-      rgba(233, 0, 0, 0.1) 0%,
+      rgba($cold-bruised, 0.06) 0%,
       transparent 50%,
-      rgba(187, 255, 0, 0.05) 100%
+      rgba($cold-decayed, 0.03) 100%
     );
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.5s ease;
     z-index: 1;
+  }
+
+  .card-inner:hover {
+    border-color: rgba($wrong-bruised-purple, 0.3);
+    box-shadow: 0 8px 40px rgba($wrong-bruised-purple, 0.08);
   }
 
   .card-inner:hover::before {
@@ -126,8 +130,8 @@ const {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
-    filter: grayscale(20%) contrast(1.1);
+    transition: transform 0.5s ease, filter 0.4s ease;
+    filter: grayscale(30%) contrast(1.1);
   }
 
   .image-overlay {
@@ -136,81 +140,23 @@ const {
     left: 0;
     right: 0;
     bottom: 0;
-
-    /* OVERLAY OPTIONS - Uncomment to try different effects */
-
-    /* Option 1: Sickly Green Vignette - Radioactive edge glow
-    background: radial-gradient(
-      ellipse at center,
-      transparent 0%,
-      rgba(75, 75, 1, 0.3) 40%,
-      rgba(187, 255, 0, 0.4) 100%
-    );
-    */
-
-    /* Option 2: Blood Vignette - Red bleeds from edges
-    background: radial-gradient(
-      ellipse at center,
-      rgba(0, 0, 0, 0.1) 0%,
-      rgba(73, 0, 0, 0.5) 60%,
-      rgba(233, 0, 0, 0.7) 100%
-    );
-    */
-
-    /* Option 3: Corrupted Film - Diagonal streaks like damaged VHS
     background: linear-gradient(
-      135deg,
-      rgba(0, 0, 0, 0.3) 0%,
-      rgba(233, 0, 0, 0.2) 25%,
-      rgba(187, 255, 0, 0.1) 50%,
-      rgba(0, 0, 0, 0.4) 100%
+      to top,
+      rgba($void-primary, 0.7) 0%,
+      transparent 60%
     );
-    */
-
-    /* Option 4: Heavy Morgue Shadow - Strong black gradient
-    background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.5) 0%,
-      rgba(0, 0, 0, 0.3) 50%,
-      rgba(0, 0, 0, 0.8) 100%
-    );
-    */
-
-    /* Option 5: Dual-Tone Split (ACTIVE) - Disorienting chromatic aberration */
-    background:
-      /* Subtle black gradient from bottom to top */
-      linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.7) 0%,
-        transparent 60%
-      ),
-      /* Dual-tone chromatic split underneath */
-      linear-gradient(
-        to bottom right,
-        rgba(233, 0, 0, 0.4) 0%,
-        rgba(0, 0, 0, 0.2) 50%,
-        rgba(187, 255, 0, 0.3) 100%
-      );
-
-    /* Option 6: Subtle Desaturation - Muted gray-to-crimson deadening
-    background: linear-gradient(
-      to bottom,
-      rgba(42, 42, 42, 0.3) 0%,
-      rgba(73, 0, 0, 0.5) 100%
-    );
-    */
-
     opacity: 0.8;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
   }
 
   .card-inner:hover .image-overlay {
-    opacity: 0.9;
+    opacity: 0.5;
   }
 
   .card-inner:hover .card-image img {
     transform: scale(1.05);
-    filter: grayscale(0%) contrast(1.3) hue-rotate(15deg);
+    filter: grayscale(0%) contrast(1.2);
   }
 
   .card-content {
@@ -232,16 +178,17 @@ const {
   }
 
   .category {
-    color: #bbff00;
-    font-weight: 500;
+    color: $cold-bruised;
+    font-family: $font-sans;
+    font-weight: 400;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     font-size: 0.75rem;
   }
 
   .date {
-    color: #4b4b01;
-    font-family: 'Fira Code', monospace;
+    color: $cold-decayed;
+    font-family: $font-mono;
     font-size: 0.75rem;
   }
 
@@ -252,115 +199,22 @@ const {
   .card-title {
     margin: 0;
     font-size: 1.5rem;
-    font-family: 'Creepster', cursive;
+    font-family: $font-display;
     line-height: 1.3;
+    color: $cold-biological;
+    transition: color 0.3s ease;
   }
 
-  .card-title a {
-    color: #f8f8f8;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    display: block;
-  }
-
-  .card-title a:hover {
-    color: #e90000;
-    text-shadow: 
-      0 0 10px #e90000,
-      0 0 20px #e90000;
+  .card-inner:hover .card-title {
+    color: $cold-pale-fog;
+    text-shadow: 0 0 20px rgba($cold-pale-fog, 0.15);
   }
 
   .card-description {
-    color: #f8f8f8;
+    color: $cold-biological;
     line-height: 1.6;
-    margin-bottom: 1.5rem;
-    opacity: 0.9;
+    opacity: 0.8;
     flex: 1;
-  }
-
-  .card-footer {
-    margin-top: auto;
-  }
-
-  .read-more {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: #bbff00;
-    font-weight: 500;
-    text-decoration: none;
-    font-size: 0.875rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    transition: all 0.3s ease;
-    padding: 0.5rem 0;
-    border: none;
-    border-bottom: 1px solid transparent;
-    background: transparent;
-    cursor: pointer;
-    font-family: inherit;
-  }
-
-  .read-more:hover {
-    color: #e90000;
-    border-bottom-color: #e90000;
-    text-shadow: 0 0 10px #e90000;
-  }
-
-  .arrow {
-    transition: transform 0.3s ease;
-    font-size: 1rem;
-  }
-
-  .read-more:hover .arrow {
-    transform: translateX(5px);
-  }
-
-  /* Liquid fill effect */
-  .liquid-fill {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 0%;
-    background: linear-gradient(
-      to top,
-      rgba(233, 0, 0, 0.3) 0%,
-      rgba(73, 0, 0, 0.2) 50%,
-      rgba(233, 0, 0, 0.1) 100%
-    );
-    transition: height 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    z-index: 1;
-    pointer-events: none;
-  }
-
-  .card-inner:hover .liquid-fill {
-    height: 30%;
-  }
-
-  /* Scanline effect */
-  .card-inner::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(187, 255, 0, 0.03) 2px,
-      rgba(187, 255, 0, 0.03) 4px
-    );
-    pointer-events: none;
-    z-index: 3;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .card-inner:hover::after {
-    opacity: 1;
   }
 
   /* Responsive */
@@ -381,21 +235,18 @@ const {
   /* Accessibility */
   @media (prefers-reduced-motion: reduce) {
     .card-inner,
-    .card-image img,
-    .liquid-fill,
-    .arrow {
+    .card-image img {
       transition: none;
     }
-    
+
     .card-inner:hover .card-image img {
       transform: none;
     }
   }
 
   /* Focus styles */
-  .card-title a:focus,
-  .read-more:focus {
-    outline: 2px solid #bbff00;
+  .post-card-link:focus {
+    outline: 2px solid $cold-pale-fog;
     outline-offset: 2px;
   }
 </style>

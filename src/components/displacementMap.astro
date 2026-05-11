@@ -155,7 +155,6 @@ const {
 
     init() {
       this.setupInteractions();
-      this.startRandomDisplacement();
     }
 
     private setupInteractions() {
@@ -166,30 +165,6 @@ const {
       this.element.addEventListener('mouseleave', () => {
         this.element.classList.remove('active');
       });
-
-      // Add click for extreme effect
-      this.element.addEventListener('click', () => {
-        this.element.classList.add('extreme');
-        setTimeout(() => {
-          this.element.classList.remove('extreme');
-        }, 1000);
-      });
-    }
-
-    private startRandomDisplacement() {
-      const randomDisplace = () => {
-        if (Math.random() > 0.85) {
-          this.element.classList.add('animated');
-          setTimeout(() => {
-            this.element.classList.remove('animated');
-          }, 4000);
-        }
-        
-        const nextInterval = Math.random() * 10000 + 5000;
-        setTimeout(randomDisplace, nextInterval);
-      };
-
-      randomDisplace();
     }
 
     private updateTurbulence() {
@@ -209,19 +184,14 @@ const {
     }
   }
 
-  // Initialize displacement maps
-  document.addEventListener('DOMContentLoaded', () => {
-    const displacementWrappers = document.querySelectorAll<HTMLElement>('.displacement-wrapper');
-    displacementWrappers.forEach(wrapper => {
-      new DisplacementMap(wrapper);
+  function initDisplacementMaps() {
+    document.querySelectorAll<HTMLElement>('.displacement-wrapper').forEach(wrapper => {
+      if (!wrapper.closest('[data-ghost-clone]')) {
+        new DisplacementMap(wrapper);
+      }
     });
-  });
+  }
 
-  // Re-initialize on page transitions
-  document.addEventListener('astro:page-load', () => {
-    const displacementWrappers = document.querySelectorAll<HTMLElement>('.displacement-wrapper');
-    displacementWrappers.forEach(wrapper => {
-      new DisplacementMap(wrapper);
-    });
-  });
+  document.addEventListener('DOMContentLoaded', initDisplacementMaps);
+  document.addEventListener('astro:page-load', initDisplacementMaps);
 </script>

@@ -1,18 +1,39 @@
-// Via Mortis - Color Palette
-$primary-dark: #490000;
-$primary-blood: rgb(155, 0, 0);
-// $primary-blood: #e90000;
-$secondary-scream: #bbff00;
-$accent-brass: #4b4b01;
+// Via Mortis — Controlled Dread Palette
+
+// THE VOID (backgrounds)
+$void-primary: #0E1614;       // Green-black — organic decay, mold, stagnant water
+$void-elevated: #0F1417;      // Blue-black — elevated surfaces (cards, modals)
+$void-deep-field: #1A2326;    // One step up from void for layered backgrounds
+
+// THE COLD (text & primary UI)
+$cold-pale-fog: #98AEB8;      // Headlines, emphasis — desaturated, life-drained
+$cold-bruised: #4E5F6B;       // Secondary text, borders — dead-skin blue
+$cold-decayed: #465E63;       // Dividers, subtle borders — slightly greener
+$cold-biological: #DCE6E2;    // Body copy — barely-blue off-white, exposed bone
+$cold-biological-warm: #E2DED6; // Alternate body text — warmer biological pale
+
+// THE WRONG NOTE (micro-accents — used SPARINGLY)
+$wrong-bruised-purple: #3E2F44; // ONLY for hover/interaction warm tone
+$wrong-dried-blood: #5A2E2E;    // RESERVED: destruction sequence + subliminal flash ONLY
+
+// SKELETON / GHOST
+$ghost-skeleton: #3D4548;     // Loading skeleton color — deeper, mournful
+
+// Legacy aliases (remove after full migration)
+$primary-dark: $void-primary;
+$primary-blood: $wrong-dried-blood;
+$secondary-scream: $cold-pale-fog;
+$accent-brass: $cold-decayed;
 $pure-black: #000000;
-$ghost-white: #f8f8f8;
-$fog-gray: #2a2a2a;
-$shadow-gray: #1a1a1a;
+$ghost-white: $cold-biological;
+$fog-gray: $void-deep-field;
+$shadow-gray: $void-elevated;
 
 // Typography
-$font-scary: 'Creepster', cursive;
-$font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-$font-mono: 'Fira Code', monospace;
+$font-display: 'IM Fell English', serif;           // Headlines — old printing press, engraved
+$font-sans: 'Pathway Gothic One', sans-serif;       // UI labels, category tags, navigation
+$font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;  // Body text
+$font-mono: 'Fira Code', monospace;                 // Technical details, dates, data
 
 // Glitch Animation Values
 $glitch-duration: 0.3s;

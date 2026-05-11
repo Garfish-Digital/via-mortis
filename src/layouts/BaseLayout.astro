@@ -1,6 +1,4 @@
 ---
-import GraveyardOverlay from '../components/GraveyardOverlay.astro';
-
 export interface Props {
   title: string;
   description?: string;
@@ -22,11 +20,18 @@ const { title, description = "Via Mortis - Macabre Tourism & Haunted Attractions
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   
+  <!-- Subliminal flash preloads — must be in memory before first trigger -->
+  <link rel="preload" as="image" href="/assets/images/subliminal-flash/flash-1.webp" />
+  <link rel="preload" as="image" href="/assets/images/subliminal-flash/flash-2.webp" />
+
   <!-- SEO Meta Tags -->
   <title>{title}</title>
   <meta property="og:title" content={title}>
   <meta property="og:description" content={description}>
   <meta property="og:image" content={image}>
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="3600">
+  <meta property="og:image:height" content="1800">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content={title}>
@@ -34,217 +39,117 @@ const { title, description = "Via Mortis - Macabre Tourism & Haunted Attractions
   <meta name="twitter:image" content={image}>
   
   <style>
-    /* Critical CSS for loading states */
+    /* Critical CSS */
     body {
       margin: 0;
       padding: 0 1rem;
-      background: #000;
-      color: #f8f8f8;
+      background: #0E1614;
+      color: #DCE6E2;
       overflow-x: hidden;
     }
-    
-    .loading-skeleton {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #000;
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 1;
-      transition: opacity 0.8s ease-out;
-    }
-    
-    .loading-skeleton.loaded {
-      opacity: 0;
-      pointer-events: none;
-    }
-    
-    .broken-screen {
-      width: 200px;
-      height: 150px;
-      border: 2px solid #490000;
-      background: linear-gradient(
-        45deg,
-        #000 25%,
-        #490000 25%,
-        #490000 50%,
-        #000 50%,
-        #000 75%,
-        #490000 75%
-      );
-      background-size: 20px 20px;
-      animation: fade-in 2000ms ease-out, glitch-load 2s infinite;
-      position: relative;
-    }
-    
-    .broken-screen::before {
-      content: 'SUMMONING...';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #bbff00;
-      font-family: 'Fira Code', monospace;
-      font-size: 12px;
-      letter-spacing: 2px;
-      text-shadow: 0 0 10px #bbff00;
-    }
-    
-    @keyframes fade-in {
-      0% {
-        opacity: 0;
-      }
-      100% {
-        opacity: 1;
-      }
-    }
 
-    @keyframes glitch-load {
-      0% {
-        filter: brightness(1) contrast(1);
-      }
-      10% {
-        filter: brightness(1.2) contrast(1.5);
-      }
-      20% {
-        filter: brightness(0.8) contrast(0.8);
-      }
-      30% {
-        filter: brightness(1.1) contrast(1.2);
-      }
-      40% {
-        filter: brightness(0.9) contrast(0.9);
-      }
-      50% {
-        filter: brightness(1.3) contrast(1.8);
-      }
-      60% {
-        filter: brightness(0.7) contrast(0.6);
-      }
-      70% {
-        filter: brightness(1.1) contrast(1.1);
-      }
-      80% {
-        filter: brightness(0.9) contrast(0.9);
-      }
-      90% {
-        filter: brightness(1.2) contrast(1.4);
-      }
-      100% {
-        filter: brightness(1) contrast(1);
-      }
-    }
   </style>
 </head>
 
 <body>
-  <!-- Loading Screen with Broken Monitor Effect -->
-  <div id="loading-skeleton" class="loading-skeleton">
-    <div class="broken-screen"></div>
-  </div>
-
   <!-- Main Content -->
-  <main id="main-content" class="ct-scanlines">
+  <!-- <main id="main-content" class="ct-scanlines"> -->
+  <main id="main-content">
     <slot />
   </main>
 
-  <!-- Graveyard Overlay Effect -->
-  <GraveyardOverlay />
+  <!-- Subliminal Flash Overlay -->
+  <!-- Inline styles are authoritative — CSS scoping must not interfere with opacity:0 -->
+  <div
+    id="subliminal-flash"
+    class="subliminal-flash"
+    aria-hidden="true"
+    style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:99999;pointer-events:none;opacity:0;"
+  >
+    <div class="flash-frame" id="flash-frame-1" style="display:none;">
+      <img src="/assets/images/subliminal-flash/flash-1.webp" alt="" />
+    </div>
+    <div class="flash-frame" id="flash-frame-2" style="display:none;">
+      <img src="/assets/images/subliminal-flash/flash-2.webp" alt="" />
+    </div>
+  </div>
 
   <!-- Global Styles -->
   <style lang="scss">
     @import "../styles/global.scss";
   </style>
 
-  <!-- JavaScript for Loading and Glitch Effects -->
+  <!-- Ghost Reveal System -->
   <script>
-    // Remove loading screen after content loads
-    window.addEventListener('load', () => {
-      const loadingScreen = document.getElementById('loading-skeleton');
-      if (loadingScreen) {
-        setTimeout(() => {
-          loadingScreen.classList.add('loaded');
-          setTimeout(() => {
-            loadingScreen.remove();
-          }, 800);
-        }, 1000);
-      }
-    });
+    import { initGhostReveal } from '../scripts/ghost-reveal.ts';
+    // Module scripts are deferred — DOM is available when this runs
+    initGhostReveal();
+  </script>
+ 
 
-    // Add glitch effects to page transitions
-    document.addEventListener('DOMContentLoaded', () => {
-      // Add unsettling mouse movement effects
-      document.addEventListener('mousemove', (e) => {
-        const intensity = Math.random() * 0.1;
-        document.body.style.transform = `translate(${e.clientX * intensity * 0.001}px, ${e.clientY * intensity * 0.001}px)`;
-      });
 
-      // Random glitch effects
-      setInterval(() => {
-        if (Math.random() > 0.95) {
-          document.body.classList.add('glitch-transition');
-          setTimeout(() => {
-            document.body.classList.remove('glitch-transition');
-          }, 300);
-        }
-      }, 5000);
+  <!-- Scroll-driven choreography -->
+  <script>
+    import { initScrollController } from '../scripts/scroll-controller.ts';
+    initScrollController();
+  </script>
 
-      // Add distortion effects to interactive elements
-      const interactiveElements = document.querySelectorAll('button, a, .card');
-      interactiveElements.forEach(element => {
-        element.addEventListener('mouseenter', () => {
-          if (Math.random() > 0.7) {
-            element.classList.add('distorted-hover');
-          }
-        });
-        
-        element.addEventListener('mouseleave', () => {
-          element.classList.remove('distorted-hover');
-        });
-      });
+  <!-- Goetic sigil cursor system -->
+  <script>
+    import { initCursorController } from '../scripts/cursor-controller.ts';
+    initCursorController();
+  </script>
 
-      // Intersection Observer for section transitions
-      const sections = document.querySelectorAll('.section');
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('distortion-screech');
-              setTimeout(() => {
-                entry.target.classList.remove('distortion-screech');
-              }, 800);
-            }
-          });
-        },
-        { threshold: 0.1 }
-      );
+  <!-- Louver parallax -->
+  <script>
+    import { initLouverParallax } from '../scripts/louver-parallax.ts';
+    initLouverParallax();
+  </script>
 
-      sections.forEach(section => {
-        observer.observe(section);
-      });
+  <!-- Audio -->
+  <script>
+    import { audioController } from '../scripts/audio-controller.ts';
+    audioController.init();
+  </script>
 
-      // Add subtle background flicker
-      setInterval(() => {
-        if (Math.random() > 0.8) {
-          document.body.style.filter = `brightness(${0.95 + Math.random() * 0.1}) contrast(${0.95 + Math.random() * 0.1})`;
-          setTimeout(() => {
-            document.body.style.filter = '';
-          }, 50);
-        }
-      }, 2000);
-    });
+  <!-- Subliminal flash -->
+  <script>
+    import { initSubliminalFlash } from '../scripts/subliminal-flash.ts';
+    initSubliminalFlash();
+  </script>
 
-    // Page transition effects
+  <!-- Canvas destruction sequence -->
+  <script>
+    import { initDestruction } from '../scripts/destruction-controller.ts';
+    initDestruction();
+  </script>
+
+  <!-- Page transition glitch -->
+  <script>
     document.addEventListener('astro:page-load', () => {
       document.body.classList.add('glitch-transition');
       setTimeout(() => {
         document.body.classList.remove('glitch-transition');
       }, 300);
     });
+  </script>
+
+  <!-- Scroll-state class: disables hover-triggered filter transitions while
+       scrolling. Without this, the page passing under the cursor fires expensive
+       feTurbulence + image filter transitions on cards, which stall render frames
+       past 16ms and drop scroll velocity. CSS rules live in global.scss. -->
+  <script>
+    (() => {
+      let scrollTimer: ReturnType<typeof setTimeout> | undefined;
+      const body = document.body;
+      window.addEventListener('scroll', () => {
+        if (!body.classList.contains('is-scrolling')) {
+          body.classList.add('is-scrolling');
+        }
+        if (scrollTimer !== undefined) clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => body.classList.remove('is-scrolling'), 150);
+      }, { passive: true });
+    })();
   </script>
 </body>
 </html>

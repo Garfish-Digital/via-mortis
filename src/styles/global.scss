@@ -1,6 +1,6 @@
 @import 'variables';
 @import 'glitch-effects';
-@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Pathway+Gothic+One&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap');
 
 // Global Reset and Base Styles
 * {
@@ -11,26 +11,21 @@
 
 html {
   font-family: $font-body;
-  background-color: $pure-black;
-  color: $ghost-white;
+  background-color: $void-primary;
+  color: $cold-biological;
   overflow-x: hidden;
   -ms-overflow-style: none; // IE 10+
   scrollbar-width: none; // Firefox
 }
 
 body {
-  background: linear-gradient(
-    135deg,
-    $pure-black 0%,
-    $shadow-gray 50%,
-    $fog-gray 100%
-  );
+  background: $void-primary;
   min-height: 100vh;
   line-height: 1.6;
   position: relative;
   -ms-overflow-style: none; // IE 10+
   scrollbar-width: none; // Firefox
-  
+
   &::before {
     content: '';
     position: fixed;
@@ -38,9 +33,9 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: 
-      radial-gradient(circle at 20% 80%, rgba($primary-blood, 0.05) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba($secondary-scream, 0.03) 0%, transparent 50%);
+    background:
+      radial-gradient(circle at 20% 80%, rgba($cold-bruised, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba($cold-decayed, 0.02) 0%, transparent 50%);
     z-index: -1;
     pointer-events: none;
   }
@@ -48,41 +43,35 @@ body {
 
 // Typography
 h1, h2, h3, h4, h5, h6 {
-  font-family: $font-scary;
+  font-family: $font-display;
   font-weight: 400;
   line-height: 1.2;
   margin-bottom: 1rem;
 }
 
 h1 {
-  font-size: clamp(2.5rem, 8vw, 6rem);
-  color: $primary-blood;
-  text-shadow: 
-    0 0 10px $primary-blood,
-    0 0 20px $primary-blood,
-    0 0 30px $primary-blood;
+  font-size: clamp(3rem, 10vw, 8rem);
+  color: $cold-pale-fog;
+  text-shadow: 0 0 40px rgba($cold-pale-fog, 0.15);
+  letter-spacing: 0.02em;
 }
 
-h2 {
-  font-size: clamp(2rem, 6vw, 4rem);
-  color: $secondary-scream;
-  text-shadow:
-    0 0 8px $secondary-scream,
-    0 0 16px $secondary-scream;
-}
+// h2 {
+//   font-size: clamp(3rem, 6vw, 4rem);
+//   color: $cold-bruised;
+//   text-shadow: 0 0 20px rgba($cold-pale-fog, 0.1);
+//   margin-left: 0.5rem;
+// }
 
-h3 {
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
-  color: $accent-brass;
-  text-shadow: 
-    0 0 5px $accent-brass,
-    0 0 10px $accent-brass;
-}
+// h3 {
+//   font-size: clamp(1.5rem, 4vw, 2.5rem);
+//   color: $cold-bruised;
+// }
 
 p {
   font-size: clamp(1rem, 2vw, 1.125rem);
   margin-bottom: 1rem;
-  color: $ghost-white;
+  color: $cold-biological;
 }
 
 // Layout Utilities
@@ -98,51 +87,51 @@ p {
 }
 
 .section {
-  padding: 4rem 1rem;
+  padding: 8rem 2rem;
   position: relative;
-  
+
   @media (max-width: $tablet) {
-    padding: 2rem .5rem;
+    padding: 4rem 1rem;
   }
 }
 
 // Interactive Elements
 button {
-  background: linear-gradient(135deg, $primary-dark 0%, $primary-blood 100%);
-  color: $ghost-white;
-  border: 2px solid $primary-blood;
+  background: transparent;
+  color: $cold-pale-fog;
+  border: 1px solid $cold-decayed;
   padding: 0.75rem 1.5rem;
-  font-family: $font-body;
+  font-family: $font-sans;
   font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
+  font-weight: 400;
+  cursor: inherit;
   transition: all $transition-normal ease;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  
+  letter-spacing: 0.1em;
+
   &:hover {
-    background: linear-gradient(135deg, $primary-blood 0%, $secondary-scream 100%);
-    color: $pure-black;
-    border-color: $secondary-scream;
-    transform: translateY(-2px);
-    box-shadow: 
-      0 4px 15px rgba($primary-blood, 0.4),
-      0 0 30px rgba($secondary-scream, 0.2);
+    color: $cold-biological;
+    border-color: $wrong-bruised-purple;
+    background: rgba($wrong-bruised-purple, 0.08);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba($wrong-bruised-purple, 0.15);
   }
-  
+
   &:active {
     transform: translateY(0);
   }
 }
 
-a {
-  color: $secondary-scream;
+a, a:any-link {
+  color: $cold-pale-fog;
   text-decoration: none;
+  cursor: inherit;
   transition: all $transition-fast ease;
-  
+
   &:hover {
-    color: $primary-blood;
-    text-shadow: 0 0 10px $primary-blood;
+    color: $cold-biological;
+    text-shadow: 0 0 10px rgba($cold-pale-fog, 0.2);
+    cursor: inherit;
   }
 }
 
@@ -158,13 +147,13 @@ a {
 
 // Card Styles
 .card {
-  background: rgba($shadow-gray, 0.8);
-  border: 1px solid rgba($primary-blood, 0.3);
+  background: rgba($void-elevated, 0.8);
+  border: 1px solid rgba($cold-decayed, 0.2);
   border-radius: 8px;
   padding: 2rem;
   backdrop-filter: blur(10px);
   position: relative;
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -174,9 +163,9 @@ a {
     bottom: 0;
     background: linear-gradient(
       135deg,
-      rgba($primary-blood, 0.1) 0%,
+      rgba($cold-bruised, 0.06) 0%,
       transparent 50%,
-      rgba($secondary-scream, 0.05) 100%
+      rgba($cold-decayed, 0.03) 100%
     );
     border-radius: inherit;
     z-index: -1;
@@ -194,7 +183,7 @@ a {
 // Loading States
 .loading {
   position: relative;
-  
+
   &::after {
     content: '';
     position: absolute;
@@ -203,8 +192,8 @@ a {
     width: 40px;
     height: 40px;
     margin: -20px 0 0 -20px;
-    border: 2px solid rgba($primary-blood, 0.3);
-    border-top: 2px solid $primary-blood;
+    border: 2px solid rgba($cold-decayed, 0.3);
+    border-top: 2px solid $cold-pale-fog;
     border-radius: 50%;
     animation: spin 1s linear infinite;
   }
@@ -242,11 +231,81 @@ a {
 
 // Focus styles
 *:focus {
-  outline: 2px solid $secondary-scream;
+  outline: 2px solid $cold-pale-fog;
   outline-offset: 2px;
 }
 
-// .deadTest {
-//   font-stretch: narrower;
-//   initial-letter: 'sunken';
-// }
+// Subliminal flash overlay
+// Position/opacity are set inline on the element — CSS here handles inner layout only.
+.flash-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    // Tint toward dried-blood — cold + slightly sickly
+    filter: sepia(0.3) hue-rotate(-15deg) brightness(0.7) contrast(1.3);
+  }
+}
+
+// Sigil cursor — JS handles hover color change; prevent browser pointer override
+button, a, [role="button"] {
+  cursor: inherit;
+}
+
+// Sigil transition effects
+.sigil-transition-violent {
+  animation: sigil-glitch 600ms ease-in-out;
+}
+
+@keyframes sigil-glitch {
+  0%   { filter: none; }
+  20%  { filter: hue-rotate(180deg) brightness(0.8); }
+  40%  { filter: hue-rotate(270deg) brightness(1.2) blur(1px); }
+  60%  { filter: hue-rotate(90deg) brightness(0.9); }
+  80%  { filter: hue-rotate(180deg) brightness(1.1) blur(0.5px); }
+  100% { filter: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sigil-transition-violent {
+    animation: none;
+  }
+}
+
+// ── Scroll-state suppression ────────────────────────────────────────────────
+// `body.is-scrolling` is toggled by the scroll listener in BaseLayout.astro.
+// While scrolling, hover-triggered filter transitions on cards/images are the
+// dominant source of render-frame stalls — they fire as the page passes under
+// the cursor, which the user perceives as "first scroll attempt fails."
+// Suppressing these during active scroll restores 60fps. Hovers re-enable
+// 150ms after the last scroll event.
+
+body.is-scrolling .displacement-wrapper:hover {
+  filter: none !important;
+}
+
+body.is-scrolling .card-inner:hover .card-image img {
+  transform: none !important;
+  filter: grayscale(30%) contrast(1.1) !important;
+}
+
+body.is-scrolling .story-image:hover img,
+body.is-scrolling .events-image-item:hover img {
+  transform: none !important;
+  filter: grayscale(60%) contrast(1.1) !important;
+}
+
+body.is-scrolling .card-image img,
+body.is-scrolling .story-image img,
+body.is-scrolling .events-image-item img,
+body.is-scrolling .displacement-wrapper {
+  transition: none !important;
+}
+
