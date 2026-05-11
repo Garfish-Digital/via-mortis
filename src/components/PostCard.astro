@@ -8,7 +8,6 @@ export interface Props {
   image?: string;
   date?: string;
   category?: string;
-  href?: string;
   className?: string;
 }
 
@@ -18,13 +17,12 @@ const {
   image,
   date,
   category = 'Attraction',
-  href = '#',
   className = '',
   ...rest
 } = Astro.props;
 ---
 
-<a href={href} class={`post-card-link ${className}`} {...rest}>
+<a class={`post-card-link ${className}`} {...rest}>
   <article class="post-card" data-ghost-reveal>
     <DisplacementMap intensity={5} frequency={0.015} className="card-wrapper">
       <div class="card-inner">

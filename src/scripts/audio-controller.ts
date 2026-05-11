@@ -6,13 +6,12 @@ gsap.registerPlugin(ScrollTrigger);
 // ── Asset paths ────────────────────────────────────────────────────────────
 
 const PATHS = {
-  primaryDrone:    '/assets/audio/drones/primary-drone.wav',
-//   primaryDrone:    '/assets/audio/drones/796019__evanboyerman__uneasy-suspensful-horror-drone-atmosphere-loop.wav',
-  secondaryDrone:  '/assets/audio/drones/492807__siyamahlobo__cold-breeze-ambience.wav',
-  cursorChime:     '/assets/audio/cursor-chime/669008__department64__squeaky-scrape-10.flac',
-  flash1:          '/assets/audio/flash/193818__geoneo0__four_voices_whispering_6_wecho.wav',
-  flash2:          '/assets/audio/flash/846789__hotpin7__stingjumpscare.wav',
-  destructionRumble: '/assets/audio/destruction-rumble/117129__juskiddink__low-tension-buildup.wav',
+  primaryDrone:    '/assets/audio/drones/primary-drone.mp3',
+  secondaryDrone:  '/assets/audio/drones/492807__siyamahlobo__cold-breeze-ambience.mp3',
+  cursorChime:     '/assets/audio/cursor-chime/669008__department64__squeaky-scrape-10.mp3',
+  flash1:          '/assets/audio/flash/193818__geoneo0__four_voices_whispering_6_wecho.mp3',
+  flash2:          '/assets/audio/flash/846789__hotpin7__stingjumpscare.mp3',
+  destructionRumble: '/assets/audio/destruction-rumble/117129__juskiddink__low-tension-buildup.mp3',
 };
 
 // ── Controller ─────────────────────────────────────────────────────────────
@@ -23,21 +22,23 @@ class AudioController {
   private isActive = false;
 
   init(): void {
-    // Audio requires a prior user gesture — activate on first scroll or click
+    // Audio requires a prior user gesture — activate on first scroll or touch/click.
+    // iOS Safari requires play() in the synchronous gesture call stack, so ambient
+    // audio starts immediately. ScrollTrigger setup (which does not need the gesture)
+    // is deferred to RAF to avoid blocking the scroll/touch handler.
     const activate = () => {
       if (this.isActive) return;
       this.isActive = true;
-      // Defer heavy work (audio pipeline + new ScrollTrigger instances) off the
-      // scroll handler so the first scroll event isn't blocked by synchronous
-      // ScrollTrigger.refresh() calls and browser audio-context setup.
+      this.startAmbient();
       requestAnimationFrame(() => {
-        this.startAmbient();
         this.setupScrollTriggers();
       });
     };
 
-    window.addEventListener('scroll', activate, { once: true, passive: true });
-    window.addEventListener('click',  activate, { once: true });
+    window.addEventListener('scroll',     activate, { once: true, passive: true });
+    window.addEventListener('click',      activate, { once: true });
+    window.addEventListener('touchstart', activate, { once: true, passive: true });
+    window.addEventListener('touchend',   activate, { once: true, passive: true });
   }
 
   // ── Ambient ──────────────────────────────────────────────────────────────
